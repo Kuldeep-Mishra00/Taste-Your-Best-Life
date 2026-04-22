@@ -1,0 +1,77 @@
+import { Disclosure, Transition } from '@headlessui/react';
+import { Plus, Minus } from 'lucide-react';
+
+const faqs = [
+  {
+    q: 'What makes your wellness programs personalized?',
+    a: 'Every plan begins with a detailed assessment of your health history, goals, lifestyle, and preferences. Our certified coaches then design a program — nutrition, movement, mindfulness, and sleep — that is built specifically for you, not a template.'
+  },
+  {
+    q: 'Are your wellness programs safe?',
+    a: 'Yes. Our programs are guidance-based, designed by certified nutritionists, wellness coaches, and mindfulness specialists following evidence-based practices. We support — not replace — medical care, and we always encourage you to loop in your doctor where relevant.'
+  },
+  {
+    q: 'How long does it take to see results?',
+    a: 'Most members notice meaningful shifts in sleep, energy, and mood within 2–4 weeks. Sustainable body-composition changes typically emerge between week 6 and week 12, depending on the program and your starting point.'
+  },
+  {
+    q: 'Can I combine multiple wellness programs?',
+    a: 'Absolutely. Many members pair weight-management with mindfulness or sleep optimization. Your coach will sequence them so they support — not overwhelm — each other.'
+  },
+  {
+    q: 'Is there a refund or cancellation policy?',
+    a: 'Yes. We offer a 7-day satisfaction window on most programs, and flexible cancellation on ongoing plans. Full policy details are shared at checkout.'
+  },
+  {
+    q: 'Do you offer plans for men and women separately?',
+    a: 'Our programs are tailored to individual physiology and goals regardless of gender, with specialized tracks available for hormonal, postpartum, and age-specific needs when relevant.'
+  }
+];
+
+export default function FAQ() {
+  return (
+    <section id="faq" className="py-16 md:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16">
+        <div>
+          <span className="section-label">• Faq</span>
+          <h2 className="heading-display mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold">
+            Got Questions? <em className="italic text-brand-green">We've Got Answers.</em>
+          </h2>
+          <p className="mt-5 text-gray-600 max-w-md">
+            Everything you need to know before starting your wellness journey with us.
+            Can't find an answer? Reach out and we'll help.
+          </p>
+        </div>
+
+        <div className="divide-y divide-brand-sage/70">
+          {faqs.map((f, i) => (
+            <Disclosure key={i} defaultOpen={i === 0}>
+              {({ open }) => (
+                <div className="py-5">
+                  <Disclosure.Button className="flex w-full items-start justify-between gap-4 text-left">
+                    <span className="font-medium text-gray-900 md:text-lg">{f.q}</span>
+                    <span className="mt-1 text-brand-green shrink-0">
+                      {open ? <Minus size={18} /> : <Plus size={18} />}
+                    </span>
+                  </Disclosure.Button>
+                  <Transition
+                    enter="transition duration-200 ease-out"
+                    enterFrom="opacity-0 -translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition duration-150 ease-in"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Disclosure.Panel className="mt-3 text-gray-600 leading-relaxed pr-6">
+                      {f.a}
+                    </Disclosure.Panel>
+                  </Transition>
+                </div>
+              )}
+            </Disclosure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

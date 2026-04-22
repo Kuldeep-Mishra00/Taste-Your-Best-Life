@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { color: #1f2937; background: #ffffff; }
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-brand-green text-white px-6 py-3 rounded-full font-medium hover:bg-[#5d7246] transition shadow-sm;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-gray-300 text-gray-800 px-6 py-3 rounded-full font-medium hover:border-brand-green hover:text-brand-green transition;
+  }
+  .section-label {
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-brand-green font-medium;
+  }
+  .heading-display {
+    @apply font-display text-gray-900 leading-tight;
+  }
+}
+
+.fade-in { animation: fadeIn .7s ease both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

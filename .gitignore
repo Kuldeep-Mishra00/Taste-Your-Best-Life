@@ -1,0 +1,101 @@
+# ===========================
+# DEPENDENCIES
+# ===========================
+node_modules/
+/.pnp
+.pnp.js
+
+# ===========================
+# BUILD OUTPUTS
+# ===========================
+dist/
+dist-ssr/
+build/
+out/
+.output/
+
+# ===========================
+# ENVIRONMENT & SECRET FILES
+# ===========================
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+*.env
+
+# ===========================
+# LOGS
+# ===========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ===========================
+# OS FILES
+# ===========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ===========================
+# EDITOR & IDE
+# ===========================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.cursor/
+.claude/
+
+# ===========================
+# CACHE & TEMP
+# ===========================
+.cache/
+.temp/
+.tmp/
+*.tmp
+*.temp
+.eslintcache
+.stylelintcache
+.parcel-cache/
+
+# ===========================
+# TESTING
+# ===========================
+coverage/
+*.lcov
+.nyc_output/
+
+# ===========================
+# SENSITIVE DOCS
+# ===========================
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+secrets/
+private/
+credentials/
+config/secrets.*
+
+# ===========================
+# ALLOWLIST (must come AFTER *.env)
+# ===========================
+!.env.example
