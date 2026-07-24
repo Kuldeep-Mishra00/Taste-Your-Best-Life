@@ -46,10 +46,114 @@ const phoneMaxFor = (code) => {
   return rule.length ?? rule.range[1];
 };
 
+// --- Original 3-step wizard version of LeadForm (kept for reference, do not delete) ---
+//
+// export default function LeadForm() {
+//   const [step, setStep] = useState(1);
+//   const [submitting, setSubmitting] = useState(false);
+//   const [serverError, setServerError] = useState('');
+//
+//   const {
+//     register,
+//     handleSubmit,
+//     getValues,
+//     watch,
+//     setValue,
+//     reset,
+//     formState: { errors }
+//   } = useForm({
+//     mode: 'onTouched',
+//     defaultValues: {
+//       fullName: '',
+//       countryCode: '+91',
+//       phone: '',
+//       email: '',
+//       state: '',
+//       concernArea: '',
+//       problemDetails: ''
+//     }
+//   });
+//
+//   const selectedCode = watch('countryCode');
+//   const maxDigits = phoneMaxFor(selectedCode);
+//
+//   const onStep1Submit = () => {
+//     setServerError('');
+//     setStep(2);
+//   };
+//
+//   const onStep2Submit = async (data) => {
+//     setServerError('');
+//     setSubmitting(true);
+//     const result = await sendLeadEmail({
+//       fullName: data.fullName,
+//       countryCode: data.countryCode,
+//       phone: data.phone,
+//       email: data.email,
+//       state: data.state,
+//       concernArea: data.concernArea,
+//       problemDetails: data.problemDetails
+//     });
+//     setSubmitting(false);
+//
+//     if (result.ok) {
+//       setStep(3);
+//     } else {
+//       setServerError('Submission failed. Please try again in a moment.');
+//     }
+//   };
+//
+//   const goBackToEdit = () => {
+//     setServerError('');
+//     setStep(1);
+//   };
+//
+//   const name = getValues('fullName');
+//
+//   return (
+//     <section id="lead" className="py-16 md:py-24 bg-white">
+//       <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 items-start">
+//         <div className="lg:sticky lg:top-28"> ... intro copy + trust badges ... </div>
+//
+//         <div className="bg-white rounded-3xl shadow-soft border border-brand-sage/40 p-6 md:p-8">
+//           <div className="flex items-center gap-2 mb-6">
+//             {[1, 2, 3].map((n) => ( ... 1-2-3 progress indicator ... ))}
+//           </div>
+//
+//           {step === 1 && (
+//             <form onSubmit={handleSubmit(onStep1Submit)} className="space-y-4 fade-in" noValidate>
+//               {/* Full Name, Phone Number, Email Address, State fields */}
+//               <button type="submit" className="btn-primary w-full justify-center mt-2">
+//                 Continue <ArrowRight size={16} />
+//               </button>
+//             </form>
+//           )}
+//
+//           {step === 2 && (
+//             <form onSubmit={handleSubmit(onStep2Submit)} className="space-y-4 fade-in" noValidate>
+//               {/* Concern Area, Problem Details fields */}
+//               <div className="flex gap-3 pt-2">
+//                 <button type="button" onClick={goBackToEdit} className="btn-outline flex-1 justify-center">← Back</button>
+//                 <button type="submit" disabled={submitting} className="btn-primary flex-1 justify-center disabled:opacity-70">
+//                   {submitting ? 'Submitting…' : <>Submit <ArrowRight size={16} /></>}
+//                 </button>
+//               </div>
+//             </form>
+//           )}
+//
+//           {step === 3 && ( ... thank-you screen ... )}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+//
+// --- End original 3-step wizard version ---
+
 export default function LeadForm() {
-  const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   const {
     register,
@@ -57,7 +161,6 @@ export default function LeadForm() {
     getValues,
     watch,
     setValue,
-    reset,
     formState: { errors }
   } = useForm({
     mode: 'onTouched',
@@ -75,12 +178,7 @@ export default function LeadForm() {
   const selectedCode = watch('countryCode');
   const maxDigits = phoneMaxFor(selectedCode);
 
-  const onStep1Submit = () => {
-    setServerError('');
-    setStep(2);
-  };
-
-  const onStep2Submit = async (data) => {
+  const onSubmit = async (data) => {
     setServerError('');
     setSubmitting(true);
     const result = await sendLeadEmail({
@@ -95,15 +193,10 @@ export default function LeadForm() {
     setSubmitting(false);
 
     if (result.ok) {
-      setStep(3);
+      setSubmitted(true);
     } else {
       setServerError('Submission failed. Please try again in a moment.');
     }
-  };
-
-  const goBackToEdit = () => {
-    setServerError('');
-    setStep(1);
   };
 
   const name = getValues('fullName');
@@ -138,25 +231,15 @@ export default function LeadForm() {
         </div>
 
         <div className="bg-white rounded-3xl shadow-soft border border-brand-sage/40 p-6 md:p-8">
-          <div className="flex items-center gap-2 mb-6">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="flex items-center gap-2 flex-1">
-                <span
-                  className={`w-7 h-7 grid place-items-center rounded-full text-xs font-semibold ${
-                    step >= n ? 'bg-brand-green text-white' : 'bg-brand-sage/50 text-gray-600'
-                  }`}
-                >
-                  {n}
-                </span>
-                {n < 3 && (
-                  <div className={`h-px flex-1 ${step > n ? 'bg-brand-green' : 'bg-brand-sage'}`} />
-                )}
+          {!submitted ? (
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 fade-in" noValidate>
+              <div>
+                <h3 className="heading-display text-xl font-semibold">Tell us about yourself</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Fill in your details below and a specialist will reach out with a personalized plan.
+                </p>
               </div>
-            ))}
-          </div>
 
-          {step === 1 && (
-            <form onSubmit={handleSubmit(onStep1Submit)} className="space-y-4 fade-in" noValidate>
               <Field label="Full Name" error={errors.fullName?.message}>
                 <input
                   type="text"
@@ -167,7 +250,7 @@ export default function LeadForm() {
                     required: 'Full name is required',
                     minLength: { value: 2, message: 'Enter a valid name' },
                     pattern: {
-                      value: /^[A-Za-z\u00C0-\u024F\u0900-\u097F\s.'-]+$/,
+                      value: /^[A-Za-zÀ-ɏऀ-ॿ\s.'-]+$/,
                       message: 'Name can only contain letters'
                     }
                   })}
@@ -243,21 +326,6 @@ export default function LeadForm() {
                 </select>
               </Field>
 
-              <button type="submit" className="btn-primary w-full justify-center mt-2">
-                Continue <ArrowRight size={16} />
-              </button>
-            </form>
-          )}
-
-          {step === 2 && (
-            <form onSubmit={handleSubmit(onStep2Submit)} className="space-y-4 fade-in" noValidate>
-              <div>
-                <h3 className="heading-display text-xl font-semibold">Tell us how we can help</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  A few quick details so your specialist can prepare before reaching out.
-                </p>
-              </div>
-
               <Field label="Area you'd like help with" error={errors.concernArea?.message}>
                 <select
                   className="input"
@@ -290,26 +358,15 @@ export default function LeadForm() {
                 <p className="text-sm text-red-600">{serverError}</p>
               )}
 
-              <div className="flex gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={goBackToEdit}
-                  className="btn-outline flex-1 justify-center"
-                >
-                  ← Back
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="btn-primary flex-1 justify-center disabled:opacity-70"
-                >
-                  {submitting ? 'Submitting…' : <>Submit <ArrowRight size={16} /></>}
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="btn-primary w-full justify-center mt-2 disabled:opacity-70"
+              >
+                {submitting ? 'Submitting…' : <>Submit <ArrowRight size={16} /></>}
+              </button>
             </form>
-          )}
-
-          {step === 3 && (
+          ) : (
             <div className="fade-in text-center py-6">
               <div className="mx-auto w-16 h-16 rounded-full bg-brand-green/10 grid place-items-center">
                 <CheckCircle2 size={40} className="text-brand-green" />

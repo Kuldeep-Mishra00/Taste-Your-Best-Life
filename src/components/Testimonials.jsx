@@ -164,7 +164,7 @@ export default function Testimonials() {
 
         <div
           ref={trackRef}
-          className="flex gap-5 overflow-x-auto scroll-smooth px-4 md:px-8 pb-4"
+          className="testimonial-track flex gap-5 overflow-x-auto scroll-smooth px-4 md:px-8 pb-4"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           <style>{`

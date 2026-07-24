@@ -14,7 +14,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-brand-green text-white">
+    <section id="newsletter" className="bg-brand-green text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16 grid md:grid-cols-2 gap-8 items-center">
         <div>
           <h2 className="heading-display text-3xl md:text-4xl font-semibold text-white">

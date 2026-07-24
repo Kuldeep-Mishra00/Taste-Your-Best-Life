@@ -11,9 +11,9 @@ export default function WhatsAppFloat() {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-5 right-5 left-5 z-50 flex flex-col items-end gap-3 pointer-events-none">
       {open && (
-        <div className="w-72 rounded-2xl shadow-soft border border-brand-sage/50 bg-white overflow-hidden fade-in">
+        <div className="w-full max-w-72 rounded-2xl shadow-soft border border-brand-sage/50 bg-white overflow-hidden fade-in pointer-events-auto">
           <div className="flex items-center justify-between px-4 py-3 bg-[#25D366] text-white">
             <div className="flex items-center gap-2">
               <WhatsAppIcon className="w-5 h-5" />
@@ -50,7 +50,7 @@ export default function WhatsAppFloat() {
       <button
         aria-label={open ? 'Close WhatsApp chat' : 'Open WhatsApp chat'}
         onClick={() => setOpen((v) => !v)}
-        className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1ebe57] text-white shadow-lg grid place-items-center transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#25D366]/30 wa-pulse"
+        className="pointer-events-auto shrink-0 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1ebe57] text-white shadow-lg grid place-items-center transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#25D366]/30 wa-pulse"
       >
         {open ? <MessageCircle size={26} /> : <WhatsAppIcon className="w-7 h-7" />}
       </button>

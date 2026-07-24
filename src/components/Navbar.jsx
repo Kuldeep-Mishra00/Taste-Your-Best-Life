@@ -5,8 +5,8 @@ import { logo } from '../utils/images.js';
 const links = [
   { label: 'Home', href: '#home' },
   { label: 'Wellness Areas', href: '#wellness-areas' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Our Story', href: '#our-story' }
+  { label: 'Testimonials', href: '#testimonials' }
+  // { label: 'Our Story', href: '#our-story' } // "Our Story" section removed per request
 ];
 
 export default function Navbar() {
@@ -26,13 +26,13 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2">
+        <a href="#home" className="flex items-center gap-2 min-w-0 shrink">
           <img
             src={logo}
             alt="Taste Your Best Life"
-            className="h-9 w-9 object-contain"
+            className="h-9 w-9 object-contain shrink-0"
           />
-          <span className="font-display font-semibold text-lg md:text-xl text-gray-900">
+          <span className="font-display font-semibold text-base sm:text-lg md:text-xl text-gray-900 truncate">
             Taste Your Best Life
           </span>
         </a>

@@ -6,7 +6,7 @@ const cols = [
     title: 'Quick Links',
     links: [
       { label: 'Home', href: '#home' },
-      { label: 'Our Story', href: '#our-story' },
+      // { label: 'Our Story', href: '#our-story' }, // "Our Story" section removed per request
       { label: 'Wellness Areas', href: '#wellness-areas' },
       { label: 'Testimonials', href: '#testimonials' },
       { label: 'Start Your Journey', href: '#lead' },

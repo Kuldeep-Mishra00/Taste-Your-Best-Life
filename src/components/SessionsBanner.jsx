@@ -3,7 +3,7 @@ import { sessionsBanner } from '../utils/images.js';
 
 export default function SessionsBanner() {
   return (
-    <section className="relative overflow-hidden">
+    <section id="sessions" className="relative overflow-hidden">
       <img
         src={sessionsBanner}
         alt="Woman meditating by a lake"

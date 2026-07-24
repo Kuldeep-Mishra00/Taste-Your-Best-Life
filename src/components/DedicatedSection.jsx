@@ -3,7 +3,7 @@ import { dedicatedImage } from '../utils/images.js';
 
 export default function DedicatedSection() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section id="dedicated" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div className="relative">
           <div className="rounded-3xl overflow-hidden shadow-soft aspect-square">
@@ -27,17 +27,21 @@ export default function DedicatedSection() {
             nutrition, our specialists walk alongside you at every step.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-6 text-sm">
-            <div>
-              <p className="font-display text-3xl text-gray-900">20K+</p>
-              <p className="text-gray-500">Established</p>
+          {/*
+            --- Removed per request: "20K+ Established | 50K+ Wellness Sessions"
+            stat row (kept for reference, do not delete) ---
+            <div className="mt-8 flex flex-wrap gap-6 text-sm">
+              <div>
+                <p className="font-display text-3xl text-gray-900">20K+</p>
+                <p className="text-gray-500">Established</p>
+              </div>
+              <div className="h-10 w-px bg-brand-sage" />
+              <div>
+                <p className="font-display text-3xl text-gray-900">50K+</p>
+                <p className="text-gray-500">Wellness Sessions</p>
+              </div>
             </div>
-            <div className="h-10 w-px bg-brand-sage" />
-            <div>
-              <p className="font-display text-3xl text-gray-900">50K+</p>
-              <p className="text-gray-500">Wellness Sessions</p>
-            </div>
-          </div>
+          */}
 
           <a href="#lead" className="inline-flex items-center gap-2 mt-8 text-brand-green font-medium hover:gap-3 transition-all">
             Explore more <ArrowRight size={16} />

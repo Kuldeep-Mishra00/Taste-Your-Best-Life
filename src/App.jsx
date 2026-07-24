@@ -1,7 +1,7 @@
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
-import AboutMission from './components/AboutMission.jsx';
-import DedicatedSection from './components/DedicatedSection.jsx';
+// import AboutMission from './components/AboutMission.jsx'; // "Our Story / Our Mission" strip removed per request — component kept in place, just no longer rendered
+// import DedicatedSection from './components/DedicatedSection.jsx'; // "Dedicated to helping you heal, grow, and thrive" section removed per request — component kept in place, just no longer rendered
 import WhyChooseUs from './components/WhyChooseUs.jsx';
 import Testimonials from './components/Testimonials.jsx';
 import LeadForm from './components/LeadForm.jsx';
@@ -17,8 +17,8 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <AboutMission />
-        <DedicatedSection />
+        {/* <AboutMission /> removed per request */}
+        {/* <DedicatedSection /> removed per request */}
         <WhyChooseUs />
         <Testimonials />
         <LeadForm />
