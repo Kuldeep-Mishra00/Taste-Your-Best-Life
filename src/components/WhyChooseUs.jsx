@@ -2,11 +2,11 @@ import { Fragment, useState } from 'react';
 import { Check, ArrowRight, ChevronDown, X, PlayCircle } from 'lucide-react';
 import {
   weightLossImage,
-  weightGainImage,
-  communityImage,
+  // weightGainImage, // "Weight Loss" + "Weight Gain" merged into one "Weight Management" card below — still exported from images.js
+  // communityImage, // "Healthy Community" card removed per request — still exported from images.js
   skinCareImage,
-  kidNutritionImage,
-  eyeNutritionImage
+  kidNutritionImage
+  // eyeNutritionImage // "Eye Nutrition" card removed per request — still exported from images.js
 } from '../utils/images.js';
 
 // --- Original Wellness Areas dataset (kept for reference, do not delete) ---
@@ -32,6 +32,59 @@ import {
 // ];
 // --- End original dataset ---
 
+// --- Previous 6-topic dataset (kept for reference, do not delete) ---
+// const cards = [
+//   {
+//     id: 'weight-loss',
+//     image: weightLossImage,
+//     kicker: 'Weight Loss',
+//     title: 'Sustainable weight loss that fits Indian kitchens and real schedules.',
+//     tags: ['Cardio', 'Nutrition', 'Tracking'],
+//     videos: []
+//   },
+//   {
+//     id: 'weight-gain',
+//     image: weightGainImage,
+//     kicker: 'Weight Gain',
+//     title: 'Build strength and healthy mass with guided training and meal plans.',
+//     tags: ['Strength', 'Protein', 'Recovery'],
+//     videos: []
+//   },
+//   {
+//     id: 'healthy-community',
+//     image: communityImage,
+//     kicker: 'Healthy Community',
+//     title: 'Grow alongside a supportive community — accountability that actually lasts.',
+//     tags: ['Group Support', 'Coaching', 'Habits'],
+//     videos: []
+//   },
+//   {
+//     id: 'skin-care',
+//     image: skinCareImage,
+//     kicker: 'Skin Care',
+//     title: 'Radiant, healthy skin through nutrition, hydration, and the right daily habits.',
+//     tags: ['Hydration', 'Diet', 'Skin Health'],
+//     videos: []
+//   },
+//   {
+//     id: 'kid-nutrition',
+//     image: kidNutritionImage,
+//     kicker: 'Kid Nutrition',
+//     title: 'Balanced, kid-approved meal plans that support growth, focus, and immunity.',
+//     tags: ['Growth', 'Immunity', 'Picky Eaters'],
+//     videos: []
+//   },
+//   {
+//     id: 'eye-nutrition',
+//     image: eyeNutritionImage,
+//     kicker: 'Eye Nutrition',
+//     title: 'Nutrient-rich guidance to protect your vision and ease digital eye strain.',
+//     tags: ['Vision Care', 'Antioxidants', 'Screen Health'],
+//     videos: []
+//   }
+// ];
+// --- End previous 6-topic dataset ---
+
 // Each card now carries an `id` (used to track which card is expanded) and a
 // `videos` array of YouTube video IDs. Upload the testimonial video to YouTube,
 // grab the ID from its URL (the part after "v="), and add it to that topic's
@@ -39,27 +92,11 @@ import {
 // click the card. Leave the array empty until you have videos ready.
 const cards = [
   {
-    id: 'weight-loss',
+    id: 'weight-management',
     image: weightLossImage,
-    kicker: 'Weight Loss',
-    title: 'Sustainable weight loss that fits Indian kitchens and real schedules.',
-    tags: ['Cardio', 'Nutrition', 'Tracking'],
-    videos: []
-  },
-  {
-    id: 'weight-gain',
-    image: weightGainImage,
-    kicker: 'Weight Gain',
-    title: 'Build strength and healthy mass with guided training and meal plans.',
-    tags: ['Strength', 'Protein', 'Recovery'],
-    videos: []
-  },
-  {
-    id: 'healthy-community',
-    image: communityImage,
-    kicker: 'Healthy Community',
-    title: 'Grow alongside a supportive community — accountability that actually lasts.',
-    tags: ['Group Support', 'Coaching', 'Habits'],
+    kicker: 'Weight Management',
+    title: 'Personalized weight management — whether your goal is to lose, gain, or simply feel stronger, built around real Indian kitchens and schedules.',
+    tags: ['Weight Loss', 'Weight Gain'],
     videos: []
   },
   {
@@ -67,44 +104,40 @@ const cards = [
     image: skinCareImage,
     kicker: 'Skin Care',
     title: 'Radiant, healthy skin through nutrition, hydration, and the right daily habits.',
-    tags: ['Hydration', 'Diet', 'Skin Health'],
+    tags: ['Hydration', 'Nutrition', 'Skin Health'],
     videos: []
   },
   {
-    id: 'kid-nutrition',
+    id: 'child-nutrition',
     image: kidNutritionImage,
-    kicker: 'Kid Nutrition',
-    title: 'Balanced, kid-approved meal plans that support growth, focus, and immunity.',
-    tags: ['Growth', 'Immunity', 'Picky Eaters'],
-    videos: []
-  },
-  {
-    id: 'eye-nutrition',
-    image: eyeNutritionImage,
-    kicker: 'Eye Nutrition',
-    title: 'Nutrient-rich guidance to protect your vision and ease digital eye strain.',
-    tags: ['Vision Care', 'Antioxidants', 'Screen Health'],
+    kicker: 'Child Nutrition',
+    title: 'Balanced, kid-approved meal plans that support growth, focus, and everyday wellness.',
+    tags: ['Growth', 'Wellness', 'Picky Eaters'],
     videos: []
   }
 ];
 
 export default function WhyChooseUs() {
   const [openCardId, setOpenCardId] = useState(null);
+  // When a card's dropdown is open, it starts on the "details" (h3) view.
+  // Clicking the "Watch Testimonials" button inside the dropdown switches to this view.
+  const [showVideos, setShowVideos] = useState(false);
 
   const toggleCard = (id) => {
     setOpenCardId((current) => (current === id ? null : id));
+    setShowVideos(false);
   };
 
   return (
     <section id="wellness-areas" className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="w-full px-4 md:px-8">
         <div className="max-w-2xl mb-10 md:mb-14">
           <span className="section-label">✦ Where We Help</span>
           <h2 className="heading-display mt-4 text-3xl md:text-4xl font-semibold">
             Wellness that fits <em className="italic text-brand-green">every journey</em>
           </h2>
           <p className="mt-4 text-gray-600">
-            Six focus areas, one personalized plan — whatever your goal, our specialists
+            Three focus areas, one personalized plan — whatever your goal, our specialists
             build a path that fits your body, your family, and your life. Tap a topic to
             watch real video testimonials.
           </p>
@@ -141,6 +174,54 @@ export default function WhyChooseUs() {
                   </article>
                   --- End original card markup ---
                 */}
+                {/*
+                  --- Card markup before the "Read More" redesign (kept for reference, do not delete) ---
+                  <article role="button" tabIndex={0} aria-expanded={isOpen} onClick={() => toggleCard(c.id)} className="relative rounded-3xl overflow-hidden min-h-[380px] group cursor-pointer">
+                    <img src={c.image} alt={c.kicker} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+                    <div className="absolute inset-0 bg-black/35" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/25" />
+                    <div className="relative h-full flex flex-col justify-between p-7 text-white">
+                      <div className="flex items-center justify-between gap-2">
+                        <span>{c.kicker}</span>
+                        <ChevronDown size={18} />
+                      </div>
+                      <div className="bg-black/45 backdrop-blur-sm rounded-2xl p-4 -mx-1">
+                        <h3 className="font-display text-xl md:text-2xl leading-snug">{c.title}</h3>
+                        <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                          {c.tags.map((t) => (<span key={t}><Check size={12} /> {t}</span>))}
+                        </div>
+                        <div className="mt-5 flex items-center justify-between gap-3">
+                          <a href="#lead" onClick={(e) => e.stopPropagation()}>Start now <ArrowRight size={16} /></a>
+                          <span><PlayCircle size={14} /> {isOpen ? 'Hide' : 'Watch'} testimonials</span>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  {isOpen && (
+                    <div className="col-span-full rounded-3xl border border-brand-sage/50 bg-brand-cream/40 p-6 md:p-8">
+                      <div className="flex items-start justify-between gap-4 mb-5">
+                        <div>
+                          <span className="section-label">▶ Video Testimonials</span>
+                          <h4 className="font-display text-lg md:text-xl text-gray-900 mt-1">{c.kicker} — real stories from real clients</h4>
+                        </div>
+                        <button onClick={() => setOpenCardId(null)}><X size={18} /></button>
+                      </div>
+                      {c.videos.length > 0 ? (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                          {c.videos.map((videoId) => (
+                            <div key={videoId} className="aspect-video rounded-2xl overflow-hidden shadow-soft bg-black">
+                              <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${videoId}`} title={`${c.kicker} video testimonial`} allowFullScreen />
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p>No video testimonials for {c.kicker} yet. ...</p>
+                      )}
+                    </div>
+                  )}
+                  --- End card markup before "Read More" redesign ---
+                */}
                 <article
                   role="button"
                   tabIndex={0}
@@ -175,10 +256,7 @@ export default function WhyChooseUs() {
                       />
                     </div>
                     <div className="bg-black/45 backdrop-blur-sm rounded-2xl p-4 -mx-1">
-                      <h3 className="font-display text-xl md:text-2xl leading-snug [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">
-                        {c.title}
-                      </h3>
-                      <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                      <div className="flex flex-wrap gap-2 text-xs">
                         {c.tags.map((t) => (
                           <span
                             key={t}
@@ -196,9 +274,16 @@ export default function WhyChooseUs() {
                         >
                           Start now <ArrowRight size={16} />
                         </a>
-                        <span className="inline-flex items-center gap-1 text-xs text-white/80">
-                          <PlayCircle size={14} /> {isOpen ? 'Hide' : 'Watch'} testimonials
-                        </span>
+                        <button
+                          type="button"
+                          className="inline-flex items-center gap-1 text-xs font-medium text-white/90 hover:text-white transition"
+                        >
+                          {isOpen ? 'Close' : 'Read More'}
+                          <ChevronDown
+                            size={14}
+                            className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                          />
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -208,44 +293,71 @@ export default function WhyChooseUs() {
                   <div className="col-span-full rounded-3xl border border-brand-sage/50 bg-brand-cream/40 p-6 md:p-8">
                     <div className="flex items-start justify-between gap-4 mb-5">
                       <div>
-                        <span className="section-label">▶ Video Testimonials</span>
-                        <h4 className="font-display text-lg md:text-xl text-gray-900 mt-1">
-                          {c.kicker} — real stories from real clients
-                        </h4>
+                        <span className="section-label">
+                          {showVideos ? '▶ Video Testimonials' : '✦ Full Details'}
+                        </span>
+                        {showVideos ? (
+                          <h4 className="font-display text-lg md:text-xl text-gray-900 mt-1">
+                            {c.kicker} — real stories from real clients
+                          </h4>
+                        ) : (
+                          <h3 className="font-display text-lg md:text-xl text-gray-900 mt-1 leading-snug">
+                            {c.title}
+                          </h3>
+                        )}
                       </div>
                       <button
                         type="button"
                         onClick={() => setOpenCardId(null)}
-                        aria-label="Close video testimonials"
+                        aria-label="Close details"
                         className="shrink-0 p-2 rounded-full hover:bg-black/5 text-gray-500"
                       >
                         <X size={18} />
                       </button>
                     </div>
 
-                    {c.videos.length > 0 ? (
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {c.videos.map((videoId) => (
-                          <div key={videoId} className="aspect-video rounded-2xl overflow-hidden shadow-soft bg-black">
-                            <iframe
-                              className="w-full h-full"
-                              src={`https://www.youtube.com/embed/${videoId}`}
-                              title={`${c.kicker} video testimonial`}
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              referrerPolicy="strict-origin-when-cross-origin"
-                              allowFullScreen
-                            />
-                          </div>
-                        ))}
-                      </div>
+                    {!showVideos ? (
+                      <button
+                        type="button"
+                        onClick={() => setShowVideos(true)}
+                        className="btn-primary"
+                      >
+                        <PlayCircle size={16} /> Watch Testimonials
+                      </button>
                     ) : (
-                      <p className="text-gray-600 text-sm max-w-xl">
-                        No video testimonials for {c.kicker} yet. Upload a video to YouTube, copy its
-                        video ID (the part after <code className="px-1 py-0.5 bg-black/5 rounded">v=</code> in
-                        the URL), then add it to the <code className="px-1 py-0.5 bg-black/5 rounded">videos</code> array
-                        for "{c.kicker}" in <code className="px-1 py-0.5 bg-black/5 rounded">WhyChooseUs.jsx</code> — it
-                        will show up here automatically.
-                      </p>
+                      <>
+                        {c.videos.length > 0 ? (
+                          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {c.videos.map((videoId) => (
+                              <div key={videoId} className="aspect-video rounded-2xl overflow-hidden shadow-soft bg-black">
+                                <iframe
+                                  className="w-full h-full"
+                                  src={`https://www.youtube.com/embed/${videoId}`}
+                                  title={`${c.kicker} video testimonial`}
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  referrerPolicy="strict-origin-when-cross-origin"
+                                  allowFullScreen
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-gray-600 text-sm max-w-xl">
+                            No video testimonials for {c.kicker} yet. Upload a video to YouTube, copy its
+                            video ID (the part after <code className="px-1 py-0.5 bg-black/5 rounded">v=</code> in
+                            the URL), then add it to the <code className="px-1 py-0.5 bg-black/5 rounded">videos</code> array
+                            for "{c.kicker}" in <code className="px-1 py-0.5 bg-black/5 rounded">WhyChooseUs.jsx</code> — it
+                            will show up here automatically.
+                          </p>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => setShowVideos(false)}
+                          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-green hover:gap-2 transition-all"
+                        >
+                          ← Back to details
+                        </button>
+                      </>
                     )}
                   </div>
                 )}

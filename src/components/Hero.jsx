@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+// import { ChevronDown } from 'lucide-react'; // was used by the removed "Our Philosophy" scroll button below
 import { heroPortrait, heroBackdrop } from '../utils/images.js';
 // import { heroAvatars as avatars } from '../utils/images.js'; // was used by the removed avatar-stack stat line below
 
@@ -19,7 +20,7 @@ export default function Hero() {
           mixBlendMode: 'lighten'
         }}
       />
-      <div className="relative max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="relative w-full px-4 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div className="fade-in">
           <span className="section-label">✦ Wellness Reimagined</span>
           <h1 className="heading-display mt-4 text-4xl sm:text-5xl lg:text-6xl font-semibold">
@@ -80,6 +81,19 @@ export default function Hero() {
           */}
         </div>
       </div>
+
+      {/*
+        --- Removed per request: "Our Philosophy" scroll-down button under the Hero
+        content — moved into the Navbar instead (kept for reference, do not delete) ---
+        <div className="relative z-10 mt-10 md:mt-14 flex justify-center">
+          <a href="#philosophy" aria-label="Navigate to Our Philosophy" className="inline-flex flex-col items-center gap-1.5 text-brand-green/80 hover:text-brand-green transition group">
+            <span className="text-xs font-medium uppercase tracking-[0.2em]">Our Philosophy</span>
+            <span className="w-9 h-9 rounded-full border border-brand-green/40 grid place-items-center animate-bounce group-hover:border-brand-green group-hover:bg-brand-green/5 transition">
+              <ChevronDown size={16} />
+            </span>
+          </a>
+        </div>
+      */}
     </section>
   );
 }

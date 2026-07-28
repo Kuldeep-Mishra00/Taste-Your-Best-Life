@@ -4,7 +4,7 @@ import { dedicatedImage } from '../utils/images.js';
 export default function DedicatedSection() {
   return (
     <section id="dedicated" className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="w-full px-4 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div className="relative">
           <div className="rounded-3xl overflow-hidden shadow-soft aspect-square">
             <img

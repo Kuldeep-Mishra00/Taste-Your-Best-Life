@@ -4,6 +4,7 @@ import { logo } from '../utils/images.js';
 
 const links = [
   { label: 'Home', href: '#home' },
+  { label: 'Our Philosophy', href: '#philosophy' },
   { label: 'Wellness Areas', href: '#wellness-areas' },
   { label: 'Testimonials', href: '#testimonials' }
   // { label: 'Our Story', href: '#our-story' } // "Our Story" section removed per request
@@ -25,7 +26,7 @@ export default function Navbar() {
         scrolled ? 'bg-white/95 backdrop-blur shadow-sm' : 'bg-white/80 backdrop-blur-sm'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
+      <nav className="w-full px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2 min-w-0 shrink">
           <img
             src={logo}

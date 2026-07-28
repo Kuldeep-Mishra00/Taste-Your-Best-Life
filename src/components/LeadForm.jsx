@@ -112,7 +112,7 @@ const phoneMaxFor = (code) => {
 //
 //   return (
 //     <section id="lead" className="py-16 md:py-24 bg-white">
-//       <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 items-start">
+//       <div className="w-full px-4 md:px-8 grid lg:grid-cols-2 gap-12 items-start">
 //         <div className="lg:sticky lg:top-28"> ... intro copy + trust badges ... </div>
 //
 //         <div className="bg-white rounded-3xl shadow-soft border border-brand-sage/40 p-6 md:p-8">
@@ -203,7 +203,7 @@ export default function LeadForm() {
 
   return (
     <section id="lead" className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 items-start">
+      <div className="w-full px-4 md:px-8 grid lg:grid-cols-2 gap-12 items-start">
         <div className="lg:sticky lg:top-28">
           <span className="section-label">✦ Begin Today</span>
           <h2 className="heading-display mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold">

@@ -37,7 +37,7 @@ const cols = [
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+      <div className="w-full px-4 md:px-8 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2">
             <img
@@ -84,7 +84,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-400">
+        <div className="w-full px-4 md:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-400">
           <p>© 2025 Taste Your Best Life. All rights reserved.</p>
           <div className="flex gap-5">
             <a href="#" className="hover:text-white">Privacy Policy</a>
