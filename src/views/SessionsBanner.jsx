@@ -19,7 +19,7 @@ export default function SessionsBanner() {
           href="#lead"
           className="mt-8 inline-flex items-center gap-2 border border-white text-white px-7 py-3 rounded-full font-medium hover:bg-white hover:text-brand-teal transition"
         >
-          Explore Wellness Areas <ArrowRight size={16} />
+          Book now <ArrowRight size={16} />
         </a>
       </div>
     </section>

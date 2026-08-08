@@ -1,5 +1,8 @@
-import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon } from 'lucide-react';
 import { logo } from '../utils/images.js';
+import { useFooterLinksController } from '../controllers/useFooterLinksController.js';
+
+const PLATFORM_ICONS = { facebook: Facebook, instagram: Instagram, twitter: Twitter, youtube: Youtube };
 
 const cols = [
   {
@@ -35,6 +38,8 @@ const cols = [
 ];
 
 export default function Footer() {
+  const { socialLinks } = useFooterLinksController();
+
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="w-full px-4 md:px-8 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-5">
@@ -42,10 +47,10 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <img
               src={logo}
-              alt="Taste Your Best Life"
+              alt="NTYBL"
               className="h-9 w-9 object-contain bg-white/10 p-1 rounded"
             />
-            <span className="font-display text-lg text-white">Taste Your Best Life</span>
+            <span className="font-display text-lg text-white">NTYBL</span>
           </div>
           <p className="mt-4 text-sm text-gray-400 max-w-sm leading-relaxed">
             Smart wellness guided by human care — helping you heal, grow, and thrive
@@ -69,23 +74,28 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-4">Follow Us</h4>
           <div className="flex gap-3">
-            {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="w-9 h-9 grid place-items-center rounded-full border border-gray-700 hover:border-brand-green hover:text-white transition"
-                aria-label="Social link"
-              >
-                <Icon size={16} />
-              </a>
-            ))}
+            {socialLinks.map((link, i) => {
+              const Icon = PLATFORM_ICONS[link.platform?.toLowerCase()] || LinkIcon;
+              return (
+                <a
+                  key={link.platform || i}
+                  href={link.url || '#'}
+                  target={link.url && link.url !== '#' ? '_blank' : undefined}
+                  rel={link.url && link.url !== '#' ? 'noopener noreferrer' : undefined}
+                  className="w-9 h-9 grid place-items-center rounded-full border border-gray-700 hover:border-brand-green hover:text-white transition"
+                  aria-label={link.platform ? `Follow us on ${link.platform}` : 'Social link'}
+                >
+                  <Icon size={16} />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
 
       <div className="border-t border-white/10">
         <div className="w-full px-4 md:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-400">
-          <p>© 2025 Taste Your Best Life. All rights reserved.</p>
+          <p>© 2026 NTYBL. All rights reserved.</p>
           <div className="flex gap-5">
             <a href="#" className="hover:text-white">Privacy Policy</a>
             <a href="#" className="hover:text-white">Terms</a>

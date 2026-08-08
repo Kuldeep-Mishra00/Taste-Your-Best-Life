@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CheckCircle2, Lock, Leaf, ShieldCheck, ArrowRight } from 'lucide-react';
-import { sendLeadEmail } from '../utils/emailService.js';
+import { useLeadFormController } from '../controllers/useLeadFormController.js';
 
 const INDIAN_STATES = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa',
@@ -151,9 +150,7 @@ const phoneMaxFor = (code) => {
 // --- End original 3-step wizard version ---
 
 export default function LeadForm() {
-  const [submitting, setSubmitting] = useState(false);
-  const [serverError, setServerError] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const { submitting, serverError, submitted, submit } = useLeadFormController();
 
   const {
     register,
@@ -178,10 +175,8 @@ export default function LeadForm() {
   const selectedCode = watch('countryCode');
   const maxDigits = phoneMaxFor(selectedCode);
 
-  const onSubmit = async (data) => {
-    setServerError('');
-    setSubmitting(true);
-    const result = await sendLeadEmail({
+  const onSubmit = (data) =>
+    submit({
       fullName: data.fullName,
       countryCode: data.countryCode,
       phone: data.phone,
@@ -190,14 +185,6 @@ export default function LeadForm() {
       concernArea: data.concernArea,
       problemDetails: data.problemDetails
     });
-    setSubmitting(false);
-
-    if (result.ok) {
-      setSubmitted(true);
-    } else {
-      setServerError('Submission failed. Please try again in a moment.');
-    }
-  };
 
   const name = getValues('fullName');
 

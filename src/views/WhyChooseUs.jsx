@@ -1,13 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Check, ArrowRight, ChevronDown, X, PlayCircle } from 'lucide-react';
-import {
-  weightLossImage,
-  // weightGainImage, // "Weight Loss" + "Weight Gain" merged into one "Weight Management" card below — still exported from images.js
-  // communityImage, // "Healthy Community" card removed per request — still exported from images.js
-  skinCareImage,
-  kidNutritionImage
-  // eyeNutritionImage // "Eye Nutrition" card removed per request — still exported from images.js
-} from '../utils/images.js';
+import { useWellnessAreasController } from '../controllers/useWellnessAreasController.js';
 
 // --- Original Wellness Areas dataset (kept for reference, do not delete) ---
 // const cards = [
@@ -85,39 +78,10 @@ import {
 // ];
 // --- End previous 6-topic dataset ---
 
-// Each card now carries an `id` (used to track which card is expanded) and a
-// `videos` array of YouTube video IDs. Upload the testimonial video to YouTube,
-// grab the ID from its URL (the part after "v="), and add it to that topic's
-// `videos` array below — it will appear as an embedded player when visitors
-// click the card. Leave the array empty until you have videos ready.
-const cards = [
-  {
-    id: 'weight-management',
-    image: weightLossImage,
-    kicker: 'Weight Management',
-    title: 'Personalized weight management — whether your goal is to lose, gain, or simply feel stronger, built around real Indian kitchens and schedules.',
-    tags: ['Weight Loss', 'Weight Gain'],
-    videos: []
-  },
-  {
-    id: 'skin-care',
-    image: skinCareImage,
-    kicker: 'Skin Care',
-    title: 'Radiant, healthy skin through nutrition, hydration, and the right daily habits.',
-    tags: ['Hydration', 'Nutrition', 'Skin Health'],
-    videos: []
-  },
-  {
-    id: 'child-nutrition',
-    image: kidNutritionImage,
-    kicker: 'Child Nutrition',
-    title: 'Balanced, kid-approved meal plans that support growth, focus, and everyday wellness.',
-    tags: ['Growth', 'Wellness', 'Picky Eaters'],
-    videos: []
-  }
-];
+// Fallback data + fetch/merge logic now live in useWellnessAreasController.
 
 export default function WhyChooseUs() {
+  const { cards } = useWellnessAreasController();
   const [openCardId, setOpenCardId] = useState(null);
   // When a card's dropdown is open, it starts on the "details" (h3) view.
   // Clicking the "Watch Testimonials" button inside the dropdown switches to this view.
@@ -345,9 +309,8 @@ export default function WhyChooseUs() {
                           <p className="text-gray-600 text-sm max-w-xl">
                             No video testimonials for {c.kicker} yet. Upload a video to YouTube, copy its
                             video ID (the part after <code className="px-1 py-0.5 bg-black/5 rounded">v=</code> in
-                            the URL), then add it to the <code className="px-1 py-0.5 bg-black/5 rounded">videos</code> array
-                            for "{c.kicker}" in <code className="px-1 py-0.5 bg-black/5 rounded">WhyChooseUs.jsx</code> — it
-                            will show up here automatically.
+                            the URL), then add it to this Wellness Area from the admin panel — it will show
+                            up here automatically.
                           </p>
                         )}
                         <button

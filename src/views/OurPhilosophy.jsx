@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Apple, Dumbbell, Droplets, Moon, Smile, Users, UserCheck } from 'lucide-react';
 
-// Content sourced from tybl_our_philosophy.html — "Our Philosophy: The 7 Pillars of Good Health"
+// Static by design — not admin-panel editable. Content sourced from
+// tybl_our_philosophy.html — "Our Philosophy: The 7 Pillars of Good Health"
+const intro =
+  "True transformation isn't about quick shortcuts or crash diets — it's about building " +
+  'long-lasting, healthy daily habits. Our holistic approach rests on seven foundational ' +
+  'pillars designed to nourish your body, strengthen your mind, and support a vibrant lifestyle.';
+
 const pillars = [
   {
     icon: Apple,
@@ -69,11 +75,7 @@ export default function OurPhilosophy() {
           <h2 className="heading-display mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold">
             The <em className="italic text-brand-green">7 Pillars</em> of Good Health
           </h2>
-          <p className="mt-4 text-gray-600">
-            True transformation isn't about quick shortcuts or crash diets — it's about building
-            long-lasting, healthy daily habits. Our holistic approach rests on seven foundational
-            pillars designed to nourish your body, strengthen your mind, and support a vibrant lifestyle.
-          </p>
+          <p className="mt-4 text-gray-600">{intro}</p>
         </div>
 
         <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -30,11 +30,11 @@ export default function Navbar() {
         <a href="#home" className="flex items-center gap-2 min-w-0 shrink">
           <img
             src={logo}
-            alt="Taste Your Best Life"
+            alt="NTYBL"
             className="h-9 w-9 object-contain shrink-0"
           />
           <span className="font-display font-semibold text-base sm:text-lg md:text-xl text-gray-900 truncate">
-            Taste Your Best Life
+            NTYBL
           </span>
         </a>
 

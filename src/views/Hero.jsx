@@ -1,9 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 // import { ChevronDown } from 'lucide-react'; // was used by the removed "Our Philosophy" scroll button below
-import { heroPortrait, heroBackdrop } from '../utils/images.js';
 // import { heroAvatars as avatars } from '../utils/images.js'; // was used by the removed avatar-stack stat line below
+import { useHomeController } from '../controllers/useHomeController.js';
 
 export default function Hero() {
+  const { heroPortrait, heroPortraitAlt, heroBackdrop } = useHomeController();
+
   return (
     <section
       id="home"
@@ -67,7 +69,7 @@ export default function Hero() {
           <div className="relative rounded-[2rem] overflow-hidden shadow-soft aspect-[4/5] max-w-md mx-auto lg:mx-0 lg:ml-auto">
             <img
               src={heroPortrait}
-              alt="A supportive wellness community gathered together"
+              alt={heroPortraitAlt}
               className="w-full h-full object-cover"
             />
           </div>
