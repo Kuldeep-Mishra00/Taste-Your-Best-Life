@@ -94,14 +94,14 @@ export default function WhyChooseUs({ onOpenLead }) {
   };
 
   return (
-    <section id="wellness-areas" className="py-16 md:py-24 bg-white">
+    <section id="wellness-areas" className="py-16 md:py-24 bg-white dark:bg-gray-950">
       <div className="w-full px-4 md:px-8">
         <div className="max-w-2xl mb-10 md:mb-14">
           <span className="section-label">✦ Where We Help</span>
           <h2 className="heading-display mt-4 text-3xl md:text-4xl font-semibold">
             Wellness that fits <em className="italic text-brand-green">every journey</em>
           </h2>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-gray-600 dark:text-gray-300">
             Three focus areas, one personalized plan — whatever your goal, our specialists
             build a path that fits your body, your family, and your life. Tap a topic to
             watch real video testimonials.
@@ -255,18 +255,18 @@ export default function WhyChooseUs({ onOpenLead }) {
                 </article>
 
                 {isOpen && (
-                  <div className="col-span-full rounded-3xl border border-brand-sage/50 bg-brand-cream/40 p-6 md:p-8">
+                  <div className="col-span-full rounded-3xl border border-brand-sage/50 dark:border-gray-700 bg-brand-cream/40 dark:bg-gray-800 p-6 md:p-8">
                     <div className="flex items-start justify-between gap-4 mb-5">
                       <div>
                         <span className="section-label">
                           {showVideos ? '▶ Video Testimonials' : '✦ Full Details'}
                         </span>
                         {showVideos ? (
-                          <h4 className="font-display text-lg md:text-xl text-gray-900 mt-1">
+                          <h4 className="font-display text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-1">
                             {c.kicker} — real stories from real clients
                           </h4>
                         ) : (
-                          <h3 className="font-display text-lg md:text-xl text-gray-900 mt-1 leading-snug">
+                          <h3 className="font-display text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-1 leading-snug">
                             {c.title}
                           </h3>
                         )}
@@ -330,7 +330,7 @@ export default function WhyChooseUs({ onOpenLead }) {
                             ))}
                           </div>
                         ) : (
-                          <p className="text-gray-600 text-sm max-w-xl">
+                          <p className="text-gray-600 dark:text-gray-400 text-sm max-w-xl">
                             No video testimonials for {c.kicker} yet. Upload a video to YouTube, copy its
                             video ID (the part after <code className="px-1 py-0.5 bg-black/5 rounded">v=</code> in
                             the URL), then add it to this Wellness Area from the admin panel — it will show

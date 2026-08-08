@@ -38,7 +38,7 @@ export default function Testimonials() {
   const loop = [...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-brand-cream/60">
+    <section id="testimonials" className="py-16 md:py-24 bg-brand-cream/60 dark:bg-gray-900">
       <div className="w-full px-4 md:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
           <div className="max-w-2xl">
@@ -46,7 +46,7 @@ export default function Testimonials() {
             <h2 className="heading-display mt-4 text-3xl md:text-4xl font-semibold">
               Real Stories, <em className="italic text-brand-green">Real Transformations</em>
             </h2>
-            <p className="mt-4 text-gray-600">
+            <p className="mt-4 text-gray-600 dark:text-gray-300">
               Thousands have transformed their lives through our personalized wellness programs.
             </p>
           </div>
@@ -54,14 +54,14 @@ export default function Testimonials() {
             <button
               onClick={() => scrollByCard(-1)}
               aria-label="Previous"
-              className="w-11 h-11 rounded-full border border-brand-sage hover:border-brand-green hover:text-brand-green grid place-items-center transition"
+              className="w-11 h-11 rounded-full border border-brand-sage dark:border-gray-600 dark:text-gray-300 hover:border-brand-green hover:text-brand-green grid place-items-center transition"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={() => scrollByCard(1)}
               aria-label="Next"
-              className="w-11 h-11 rounded-full border border-brand-sage hover:border-brand-green hover:text-brand-green grid place-items-center transition"
+              className="w-11 h-11 rounded-full border border-brand-sage dark:border-gray-600 dark:text-gray-300 hover:border-brand-green hover:text-brand-green grid place-items-center transition"
             >
               <ChevronRight size={18} />
             </button>
@@ -76,8 +76,8 @@ export default function Testimonials() {
         onTouchStart={() => setPaused(true)}
         onTouchEnd={() => setPaused(false)}
       >
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-brand-cream/60 to-transparent z-10" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-brand-cream/60 to-transparent z-10" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-brand-cream/60 dark:from-gray-900 to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-brand-cream/60 dark:from-gray-900 to-transparent z-10" />
 
         <div
           ref={trackRef}
@@ -90,13 +90,13 @@ export default function Testimonials() {
           {loop.map((t, idx) => (
             <article
               key={idx}
-              className="shrink-0 w-[300px] md:w-[340px] bg-white rounded-2xl border border-brand-sage/60 shadow-sm hover:shadow-soft transition p-6 flex flex-col"
+              className="shrink-0 w-[300px] md:w-[340px] bg-white dark:bg-gray-800 rounded-2xl border border-brand-sage/60 dark:border-gray-700 shadow-sm hover:shadow-soft transition p-6 flex flex-col"
             >
               <div className="flex items-center gap-3">
                 <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
                 <div>
-                  <p className="font-semibold text-gray-900">{t.name}</p>
-                  <p className="text-xs text-gray-500">{t.location}</p>
+                  <p className="font-semibold text-gray-900 dark:text-gray-100">{t.name}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t.location}</p>
                 </div>
               </div>
               <div className="flex mt-4 text-amber-400">
@@ -104,7 +104,7 @@ export default function Testimonials() {
                   <Star key={i} size={16} fill="currentColor" stroke="none" />
                 ))}
               </div>
-              <p className="mt-4 text-sm text-gray-700 leading-relaxed flex-1">"{t.quote}"</p>
+              <p className="mt-4 text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">"{t.quote}"</p>
               <span className="inline-block mt-5 self-start text-xs px-3 py-1 rounded-full bg-brand-green/10 text-brand-green font-medium">
                 {t.tag}
               </span>

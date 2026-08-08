@@ -149,14 +149,14 @@ export default function LeadForm() {
   const name = getValues('fullName');
 
   return (
-    <section id="lead" className="py-16 md:py-24 bg-white">
+    <section id="lead" className="py-16 md:py-24 bg-white dark:bg-gray-950">
       <div className="w-full px-4 md:px-8 grid lg:grid-cols-2 gap-12 items-start">
         <div className="lg:sticky lg:top-28">
           <span className="section-label">✦ Begin Today</span>
           <h2 className="heading-display mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold">
             Start Your <em className="italic text-brand-green">Wellness Journey</em> Today
           </h2>
-          <p className="mt-5 text-gray-600 leading-relaxed max-w-lg">
+          <p className="mt-5 text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg">
             Share a little about yourself and what you're hoping to work on — one of our
             wellness specialists will reach out to you within 24 hours with a personalized plan.
           </p>
@@ -169,7 +169,7 @@ export default function LeadForm() {
             ].map(({ icon: Icon, label }) => (
               <span
                 key={label}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cream text-gray-800 border border-brand-sage/60"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cream dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-brand-sage/60 dark:border-gray-700"
               >
                 <Icon size={14} className="text-brand-green" /> {label}
               </span>
@@ -177,12 +177,12 @@ export default function LeadForm() {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-soft border border-brand-sage/40 p-6 md:p-8">
+        <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-soft border border-brand-sage/40 dark:border-gray-700 p-6 md:p-8">
           {!submitted ? (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 fade-in" noValidate>
               <div>
                 <h3 className="heading-display text-xl font-semibold">Tell us about yourself</h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                   Fill in your details below and a specialist will reach out with a personalized plan.
                 </p>
               </div>
@@ -337,7 +337,7 @@ export default function LeadForm() {
               <h3 className="heading-display text-2xl font-semibold mt-5">
                 Thank you, {name || 'friend'}!
               </h3>
-              <p className="text-gray-600 mt-3 max-w-sm mx-auto">
+              <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-sm mx-auto">
                 Our wellness specialist will contact you within 24 hours with a personalized plan.
               </p>
               <a href="#wellness-areas" className="btn-primary mt-6">
@@ -355,9 +355,17 @@ export default function LeadForm() {
           border: 1px solid #D0D5CF;
           border-radius: 0.75rem;
           background: #fff;
+          color: #1f2937;
           font-size: 0.95rem;
-          transition: border-color .15s, box-shadow .15s;
+          transition: border-color .15s, box-shadow .15s, background-color .15s, color .15s;
         }
+        html.dark .input {
+          background: #1a1d23;
+          border-color: #374151;
+          color: #e5e7eb;
+        }
+        html.dark .input::placeholder { color: #9ca3af; }
+        html.dark .input option { background: #1a1d23; color: #e5e7eb; }
         .input:focus {
           outline: none;
           border-color: #708658;

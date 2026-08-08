@@ -61,11 +61,11 @@ export default function LeadFormModal({ open, onClose }) {
     <div className="fixed inset-0 z-[100] grid place-items-center p-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
 
-      <div className="relative bg-white rounded-3xl shadow-soft border border-brand-sage/40 w-full max-w-md max-h-[90vh] overflow-y-auto p-6 fade-in">
+      <div className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-soft border border-brand-sage/40 dark:border-gray-700 w-full max-w-md max-h-[90vh] overflow-y-auto p-6 fade-in">
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition"
         >
           <X size={20} />
         </button>
@@ -75,7 +75,7 @@ export default function LeadFormModal({ open, onClose }) {
             <div>
               <span className="section-label">✦ Begin Today</span>
               <h3 className="heading-display text-xl font-semibold mt-2">Start Your Wellness Journey</h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Share a few details and a specialist will reach out within 24 hours.
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function LeadFormModal({ open, onClose }) {
             <h3 className="heading-display text-2xl font-semibold mt-5">
               Thank you, {name || 'friend'}!
             </h3>
-            <p className="text-gray-600 mt-3">
+            <p className="text-gray-600 dark:text-gray-300 mt-3">
               Our wellness specialist will contact you within 24 hours with a personalized plan.
             </p>
             <button onClick={onClose} className="btn-primary mt-6">

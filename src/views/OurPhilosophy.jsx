@@ -68,14 +68,14 @@ export default function OurPhilosophy({ onOpenLead }) {
   }, []);
 
   return (
-    <section id="philosophy" className="py-16 md:py-24 bg-brand-cream/40">
+    <section id="philosophy" className="py-16 md:py-24 bg-brand-cream/40 dark:bg-gray-900">
       <div className="w-full px-4 md:px-8">
         <div className="max-w-2xl mx-auto text-center mb-10 md:mb-14">
           <span className="section-label justify-center">✦ Our Philosophy</span>
           <h2 className="heading-display mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold">
             The <em className="italic text-brand-green">7 Pillars</em> of Good Health
           </h2>
-          <p className="mt-4 text-gray-600">{intro}</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-300">{intro}</p>
         </div>
 
         <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -85,7 +85,7 @@ export default function OurPhilosophy({ onOpenLead }) {
               <div
                 key={p.title}
                 style={{ transitionDelay: inView ? `${i * 90}ms` : '0ms' }}
-                className={`group bg-white rounded-2xl border border-brand-sage/50 p-6 shadow-sm transition-all duration-700 ease-out hover:-translate-y-1.5 hover:shadow-soft hover:border-brand-green/40 ${
+                className={`group bg-white dark:bg-gray-800 rounded-2xl border border-brand-sage/50 dark:border-gray-700 p-6 shadow-sm transition-all duration-700 ease-out hover:-translate-y-1.5 hover:shadow-soft hover:border-brand-green/40 ${
                   inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
               >
@@ -97,22 +97,22 @@ export default function OurPhilosophy({ onOpenLead }) {
                     <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-brand-green/70">
                       Pillar {String(i + 1).padStart(2, '0')}
                     </p>
-                    <h3 className="font-display text-lg font-semibold text-gray-900 leading-snug">
+                    <h3 className="font-display text-lg font-semibold text-gray-900 dark:text-gray-100 leading-snug">
                       {p.title}
                     </h3>
                   </div>
                 </div>
-                <p className="mt-3 text-sm text-gray-600 leading-relaxed">{p.body}</p>
+                <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{p.body}</p>
               </div>
             );
           })}
         </div>
 
-        <div className="mt-10 md:mt-14 rounded-3xl border border-dashed border-brand-green/40 bg-white px-6 py-8 md:py-10 text-center">
+        <div className="mt-10 md:mt-14 rounded-3xl border border-dashed border-brand-green/40 bg-white dark:bg-gray-800 px-6 py-8 md:py-10 text-center">
           <h3 className="heading-display text-xl md:text-2xl font-semibold">
             Ready to start your transformation?
           </h3>
-          <p className="mt-2 text-gray-600">Connect with your personal wellness coach today.</p>
+          <p className="mt-2 text-gray-600 dark:text-gray-300">Connect with your personal wellness coach today.</p>
           <button onClick={onOpenLead} className="btn-primary mt-6 inline-flex">
             Start Your Journey <ArrowRight size={16} />
           </button>

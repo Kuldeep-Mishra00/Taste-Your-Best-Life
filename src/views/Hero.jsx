@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative pt-24 md:pt-28 pb-16 md:pb-24 overflow-hidden bg-gradient-to-b from-white via-white to-brand-cream/60"
+      className="relative pt-24 md:pt-28 pb-16 md:pb-24 overflow-hidden bg-gradient-to-b from-white via-white to-brand-cream/60 dark:from-gray-950 dark:via-gray-950 dark:to-gray-900"
     >
       <div
         aria-hidden
@@ -29,7 +29,7 @@ export default function Hero() {
             Smart Wellness <br className="hidden sm:block" />
             Guided By <em className="italic text-brand-green">Human Care</em>
           </h1>
-          <p className="mt-5 text-gray-600 text-base md:text-lg max-w-xl leading-relaxed">
+          <p className="mt-5 text-gray-600 dark:text-gray-300 text-base md:text-lg max-w-xl leading-relaxed">
             Track, breathe, and rediscover your calm self with trusted wellness programs
             that bring balance back to your everyday living.
           </p>
