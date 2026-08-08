@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
 import { fetchFooterLinks } from '../models/footerLinksModel.js';
 
-const FALLBACK_SOCIAL_LINKS = [
-  { platform: 'facebook', url: '#' },
-  { platform: 'instagram', url: '#' },
-  { platform: 'twitter', url: '#' },
-  { platform: 'youtube', url: '#' },
-];
-
+// No placeholder links — the "Follow Us" section only renders once real
+// links exist, so it stays hidden until they're added via the admin panel.
 export function useFooterLinksController() {
-  const [socialLinks, setSocialLinks] = useState(FALLBACK_SOCIAL_LINKS);
+  const [socialLinks, setSocialLinks] = useState([]);
 
   useEffect(() => {
     fetchFooterLinks().then((data) => {

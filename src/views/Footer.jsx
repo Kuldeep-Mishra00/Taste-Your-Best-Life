@@ -1,10 +1,11 @@
 import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon } from 'lucide-react';
 import { useFooterLinksController } from '../controllers/useFooterLinksController.js';
 import { useHomeController } from '../controllers/useHomeController.js';
+import { useWellnessAreasController } from '../controllers/useWellnessAreasController.js';
 
 const PLATFORM_ICONS = { facebook: Facebook, instagram: Instagram, twitter: Twitter, youtube: Youtube };
 
-const cols = [
+const STATIC_COLS = [
   {
     title: 'Quick Links',
     links: [
@@ -14,16 +15,6 @@ const cols = [
       { label: 'Testimonials', href: '#testimonials' },
       { label: 'Start Your Journey', href: '#lead' },
       { label: 'FAQs', href: '#faq' }
-    ]
-  },
-  {
-    title: 'We Help With',
-    links: [
-      { label: 'Weight Management', href: '#wellness-areas' },
-      { label: 'Mindful Living', href: '#wellness-areas' },
-      { label: 'Better Sleep', href: '#wellness-areas' },
-      { label: 'Stress & Calm', href: '#wellness-areas' },
-      { label: 'Everyday Nutrition', href: '#wellness-areas' }
     ]
   },
   {
@@ -40,6 +31,15 @@ const cols = [
 export default function Footer() {
   const { socialLinks } = useFooterLinksController();
   const { logo } = useHomeController();
+  const { cards } = useWellnessAreasController();
+
+  // Mirrors whatever Wellness Areas currently exist — add/rename/remove a
+  // card in the admin panel and this list updates on its own, no code change.
+  const weHelpWithCol = cards.length > 0 && {
+    title: 'We Help With',
+    links: cards.map((c) => ({ label: c.kicker, href: '#wellness-areas' }))
+  };
+  const cols = weHelpWithCol ? [STATIC_COLS[0], weHelpWithCol, STATIC_COLS[1]] : STATIC_COLS;
 
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -72,26 +72,28 @@ export default function Footer() {
           </div>
         ))}
 
-        <div>
-          <h4 className="text-white font-semibold mb-4">Follow Us</h4>
-          <div className="flex gap-3">
-            {socialLinks.map((link, i) => {
-              const Icon = PLATFORM_ICONS[link.platform?.toLowerCase()] || LinkIcon;
-              return (
-                <a
-                  key={link.platform || i}
-                  href={link.url || '#'}
-                  target={link.url && link.url !== '#' ? '_blank' : undefined}
-                  rel={link.url && link.url !== '#' ? 'noopener noreferrer' : undefined}
-                  className="w-9 h-9 grid place-items-center rounded-full border border-gray-700 hover:border-brand-green hover:text-white transition"
-                  aria-label={link.platform ? `Follow us on ${link.platform}` : 'Social link'}
-                >
-                  <Icon size={16} />
-                </a>
-              );
-            })}
+        {socialLinks.length > 0 && (
+          <div>
+            <h4 className="text-white font-semibold mb-4">Follow Us</h4>
+            <div className="flex gap-3">
+              {socialLinks.map((link, i) => {
+                const Icon = PLATFORM_ICONS[link.platform?.toLowerCase()] || LinkIcon;
+                return (
+                  <a
+                    key={link.platform || i}
+                    href={link.url || '#'}
+                    target={link.url && link.url !== '#' ? '_blank' : undefined}
+                    rel={link.url && link.url !== '#' ? 'noopener noreferrer' : undefined}
+                    className="w-9 h-9 grid place-items-center rounded-full border border-gray-700 hover:border-brand-green hover:text-white transition"
+                    aria-label={link.platform ? `Follow us on ${link.platform}` : 'Social link'}
+                  >
+                    <Icon size={16} />
+                  </a>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="border-t border-white/10">
