@@ -141,6 +141,8 @@ export default function LeadForm() {
       email: data.email,
       state: data.state,
       concernArea: data.concernArea,
+      height: data.height,
+      weight: data.weight,
       problemDetails: data.problemDetails
     });
 
@@ -241,14 +243,13 @@ export default function LeadForm() {
                 </div>
               </FormField>
 
-              <FormField label="Email Address" error={errors.email?.message}>
+              <FormField label="Email Address (optional)" error={errors.email?.message}>
                 <input
                   type="email"
                   placeholder="you@example.com"
                   autoComplete="email"
                   className="input"
                   {...register('email', {
-                    required: 'Email is required',
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                       message: 'Enter a valid email'
@@ -283,8 +284,27 @@ export default function LeadForm() {
                 </select>
               </FormField>
 
+              <div className="grid grid-cols-2 gap-3">
+                <FormField label="Height" error={errors.height?.message}>
+                  <input
+                    type="text"
+                    placeholder="e.g. 5'8&quot; or 172 cm"
+                    className="input"
+                    {...register('height')}
+                  />
+                </FormField>
+                <FormField label="Weight" error={errors.weight?.message}>
+                  <input
+                    type="text"
+                    placeholder="e.g. 72 kg"
+                    className="input"
+                    {...register('weight')}
+                  />
+                </FormField>
+              </div>
+
               <FormField
-                label="What's going on? (in your own words)"
+                label="What's going on? (optional)"
                 error={errors.problemDetails?.message}
               >
                 <textarea
@@ -292,8 +312,6 @@ export default function LeadForm() {
                   placeholder="e.g. I've been struggling with low energy, irregular sleep, and want to lose about 8 kg over 6 months. I work long hours and eat mostly home-cooked meals."
                   className="input resize-y"
                   {...register('problemDetails', {
-                    required: 'Please share a little about what you need help with',
-                    minLength: { value: 15, message: 'Please add a bit more detail (at least 15 characters)' },
                     maxLength: { value: 1000, message: 'Please keep it under 1000 characters' }
                   })}
                 />

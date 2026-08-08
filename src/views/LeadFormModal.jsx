@@ -52,6 +52,8 @@ export default function LeadFormModal({ open, onClose }) {
       email: data.email,
       state: data.state,
       concernArea: data.concernArea,
+      height: data.height,
+      weight: data.weight,
       problemDetails: data.problemDetails
     });
 
@@ -134,14 +136,13 @@ export default function LeadFormModal({ open, onClose }) {
               </div>
             </FormField>
 
-            <FormField label="Email Address" error={errors.email?.message}>
+            <FormField label="Email Address (optional)" error={errors.email?.message}>
               <input
                 type="email"
                 placeholder="you@example.com"
                 autoComplete="email"
                 className="input"
                 {...register('email', {
-                  required: 'Email is required',
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                     message: 'Enter a valid email'
@@ -176,8 +177,27 @@ export default function LeadFormModal({ open, onClose }) {
               </select>
             </FormField>
 
+            <div className="grid grid-cols-2 gap-3">
+              <FormField label="Height" error={errors.height?.message}>
+                <input
+                  type="text"
+                  placeholder="e.g. 172 cm"
+                  className="input"
+                  {...register('height')}
+                />
+              </FormField>
+              <FormField label="Weight" error={errors.weight?.message}>
+                <input
+                  type="text"
+                  placeholder="e.g. 72 kg"
+                  className="input"
+                  {...register('weight')}
+                />
+              </FormField>
+            </div>
+
             <FormField
-              label="What's going on? (in your own words)"
+              label="What's going on? (optional)"
               error={errors.problemDetails?.message}
             >
               <textarea
@@ -185,8 +205,6 @@ export default function LeadFormModal({ open, onClose }) {
                 placeholder="e.g. I've been struggling with low energy and want to lose weight."
                 className="input resize-y"
                 {...register('problemDetails', {
-                  required: 'Please share a little about what you need help with',
-                  minLength: { value: 15, message: 'Please add a bit more detail (at least 15 characters)' },
                   maxLength: { value: 1000, message: 'Please keep it under 1000 characters' }
                 })}
               />

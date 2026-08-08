@@ -12,6 +12,7 @@ import SessionsBanner from './views/SessionsBanner.jsx';
 import FAQ from './views/FAQ.jsx';
 import Footer from './views/Footer.jsx';
 import WhatsAppFloat from './views/WhatsAppFloat.jsx';
+import MobileLeadButton from './views/MobileLeadButton.jsx';
 
 export default function App() {
   const [leadModalOpen, setLeadModalOpen] = useState(false);
@@ -33,6 +34,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppFloat />
+      <MobileLeadButton onOpenLead={openLeadModal} />
       <LeadFormModal open={leadModalOpen} onClose={() => setLeadModalOpen(false)} />
     </div>
   );

@@ -48,5 +48,7 @@ export const LEAD_FORM_DEFAULTS = {
   email: '',
   state: '',
   concernArea: '',
+  height: '',
+  weight: '',
   problemDetails: ''
 };

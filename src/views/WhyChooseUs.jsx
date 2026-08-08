@@ -281,13 +281,37 @@ export default function WhyChooseUs({ onOpenLead }) {
                     </div>
 
                     {!showVideos ? (
-                      <button
-                        type="button"
-                        onClick={() => setShowVideos(true)}
-                        className="btn-primary"
-                      >
-                        <PlayCircle size={16} /> Watch Testimonials
-                      </button>
+                      <div className="space-y-4">
+                        {(c.detailVideo || c.detailImage) && (
+                          <div className="rounded-2xl overflow-hidden shadow-soft bg-black max-w-2xl">
+                            {c.detailVideo ? (
+                              <div className="aspect-video">
+                                <iframe
+                                  className="w-full h-full"
+                                  src={`https://www.youtube.com/embed/${c.detailVideo}`}
+                                  title={`${c.kicker} details video`}
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  referrerPolicy="strict-origin-when-cross-origin"
+                                  allowFullScreen
+                                />
+                              </div>
+                            ) : (
+                              <img
+                                src={c.detailImage}
+                                alt={`${c.kicker} details`}
+                                className="w-full max-h-80 object-cover"
+                              />
+                            )}
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => setShowVideos(true)}
+                          className="btn-primary"
+                        >
+                          <PlayCircle size={16} /> Watch Testimonials
+                        </button>
+                      </div>
                     ) : (
                       <>
                         {c.videos.length > 0 ? (

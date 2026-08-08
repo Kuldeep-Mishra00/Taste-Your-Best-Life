@@ -45,6 +45,8 @@ export function useWellnessAreasController() {
           title: item.title,
           tags: item.tags || [],
           videos: item.videos || [],
+          detailImage: item.detailImage?.url || '',
+          detailVideo: item.detailVideo || '',
         })));
       }
     });
