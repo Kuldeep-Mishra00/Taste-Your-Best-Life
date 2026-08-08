@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Check, ArrowRight, ChevronDown, X, PlayCircle } from 'lucide-react';
 import { useWellnessAreasController } from '../controllers/useWellnessAreasController.js';
+import { youtubeId } from '../utils/youtube.js';
 
 // --- Original Wellness Areas dataset (kept for reference, do not delete) ---
 // const cards = [
@@ -295,7 +296,7 @@ export default function WhyChooseUs({ onOpenLead }) {
                           <div className="rounded-2xl overflow-hidden shadow-soft bg-black max-w-2xl aspect-video">
                             <iframe
                               className="w-full h-full"
-                              src={`https://www.youtube.com/embed/${c.detailVideo}`}
+                              src={`https://www.youtube.com/embed/${youtubeId(c.detailVideo)}`}
                               title={`${c.kicker} product video`}
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               referrerPolicy="strict-origin-when-cross-origin"
@@ -319,7 +320,7 @@ export default function WhyChooseUs({ onOpenLead }) {
                               <div key={videoId} className="aspect-video rounded-2xl overflow-hidden shadow-soft bg-black">
                                 <iframe
                                   className="w-full h-full"
-                                  src={`https://www.youtube.com/embed/${videoId}`}
+                                  src={`https://www.youtube.com/embed/${youtubeId(videoId)}`}
                                   title={`${c.kicker} video testimonial`}
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                   referrerPolicy="strict-origin-when-cross-origin"
