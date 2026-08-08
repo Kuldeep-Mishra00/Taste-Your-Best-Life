@@ -282,26 +282,25 @@ export default function WhyChooseUs({ onOpenLead }) {
 
                     {!showVideos ? (
                       <div className="space-y-4">
-                        {(c.detailVideo || c.detailImage) && (
-                          <div className="rounded-2xl overflow-hidden shadow-soft bg-black max-w-2xl">
-                            {c.detailVideo ? (
-                              <div className="aspect-video">
-                                <iframe
-                                  className="w-full h-full"
-                                  src={`https://www.youtube.com/embed/${c.detailVideo}`}
-                                  title={`${c.kicker} details video`}
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                  referrerPolicy="strict-origin-when-cross-origin"
-                                  allowFullScreen
-                                />
-                              </div>
-                            ) : (
-                              <img
-                                src={c.detailImage}
-                                alt={`${c.kicker} details`}
-                                className="w-full max-h-80 object-cover"
-                              />
-                            )}
+                        {c.detailImage && (
+                          <div className="rounded-2xl overflow-hidden shadow-soft max-w-2xl">
+                            <img
+                              src={c.detailImage}
+                              alt={`${c.kicker} product`}
+                              className="w-full max-h-80 object-cover"
+                            />
+                          </div>
+                        )}
+                        {c.detailVideo && (
+                          <div className="rounded-2xl overflow-hidden shadow-soft bg-black max-w-2xl aspect-video">
+                            <iframe
+                              className="w-full h-full"
+                              src={`https://www.youtube.com/embed/${c.detailVideo}`}
+                              title={`${c.kicker} product video`}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allowFullScreen
+                            />
                           </div>
                         )}
                         <button
