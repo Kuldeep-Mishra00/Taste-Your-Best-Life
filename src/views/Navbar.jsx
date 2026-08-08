@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { logo } from '../utils/images.js';
+import { useHomeController } from '../controllers/useHomeController.js';
 
 const links = [
   { label: 'Home', href: '#home' },
@@ -11,6 +11,7 @@ const links = [
 ];
 
 export default function Navbar({ onOpenLead }) {
+  const { logo } = useHomeController();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 

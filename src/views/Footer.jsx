@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon } from 'lucide-react';
-import { logo } from '../utils/images.js';
 import { useFooterLinksController } from '../controllers/useFooterLinksController.js';
+import { useHomeController } from '../controllers/useHomeController.js';
 
 const PLATFORM_ICONS = { facebook: Facebook, instagram: Instagram, twitter: Twitter, youtube: Youtube };
 
@@ -39,6 +39,7 @@ const cols = [
 
 export default function Footer() {
   const { socialLinks } = useFooterLinksController();
+  const { logo } = useHomeController();
 
   return (
     <footer className="bg-gray-900 text-gray-300">

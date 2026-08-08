@@ -1,7 +1,8 @@
 import { ArrowRight } from 'lucide-react';
-import { sessionsBanner } from '../utils/images.js';
+import { useHomeController } from '../controllers/useHomeController.js';
 
 export default function SessionsBanner({ onOpenLead }) {
+  const { sessionsBanner } = useHomeController();
   return (
     <section id="sessions" className="relative overflow-hidden">
       <img
