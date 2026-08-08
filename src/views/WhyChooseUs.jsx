@@ -80,7 +80,7 @@ import { useWellnessAreasController } from '../controllers/useWellnessAreasContr
 
 // Fallback data + fetch/merge logic now live in useWellnessAreasController.
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({ onOpenLead }) {
   const { cards } = useWellnessAreasController();
   const [openCardId, setOpenCardId] = useState(null);
   // When a card's dropdown is open, it starts on the "details" (h3) view.
@@ -231,13 +231,13 @@ export default function WhyChooseUs() {
                         ))}
                       </div>
                       <div className="mt-5 flex items-center justify-between gap-3">
-                        <a
-                          href="#lead"
-                          onClick={(e) => e.stopPropagation()}
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); onOpenLead(); }}
                           className="inline-flex items-center gap-2 font-medium hover:gap-3 transition-all"
                         >
                           Start now <ArrowRight size={16} />
-                        </a>
+                        </button>
                         <button
                           type="button"
                           className="inline-flex items-center gap-1 text-xs font-medium text-white/90 hover:text-white transition"

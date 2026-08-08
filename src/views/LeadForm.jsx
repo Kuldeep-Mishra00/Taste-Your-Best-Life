@@ -1,49 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { CheckCircle2, Lock, Leaf, ShieldCheck, ArrowRight } from 'lucide-react';
 import { useLeadFormController } from '../controllers/useLeadFormController.js';
-
-const INDIAN_STATES = [
-  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa',
-  'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala',
-  'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland',
-  'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura',
-  'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Delhi', 'Jammu & Kashmir',
-  'Ladakh', 'Puducherry', 'Chandigarh', 'Andaman & Nicobar', 'Dadra & Nagar Haveli',
-  'Daman & Diu', 'Lakshadweep', 'Other'
-];
-
-const COUNTRY_CODES = [
-  { code: '+91',  label: 'IN', length: 10 },
-  { code: '+1',   label: 'US', length: 10 },
-  { code: '+44',  label: 'UK', range: [10, 11] },
-  { code: '+61',  label: 'AU', length: 9 },
-  { code: '+971', label: 'AE', length: 9 }
-];
-
-const CONCERN_AREAS = [
-  'Weight Loss',
-  'Weight Gain',
-  'Mindful Living / Stress',
-  'Better Sleep',
-  'Everyday Nutrition',
-  'Healthy Community / Lifestyle',
-  'Something else'
-];
-
-const phoneRuleFor = (code) => COUNTRY_CODES.find((c) => c.code === code) || COUNTRY_CODES[0];
-
-const isPhoneValidForCode = (phone, code) => {
-  if (!/^[0-9]+$/.test(phone)) return false;
-  const rule = phoneRuleFor(code);
-  if (rule.length) return phone.length === rule.length;
-  if (rule.range) return phone.length >= rule.range[0] && phone.length <= rule.range[1];
-  return false;
-};
-
-const phoneMaxFor = (code) => {
-  const rule = phoneRuleFor(code);
-  return rule.length ?? rule.range[1];
-};
+import FormField from './FormField.jsx';
+import {
+  CONCERN_AREAS,
+  COUNTRY_CODES,
+  INDIAN_STATES,
+  LEAD_FORM_DEFAULTS,
+  isPhoneValidForCode,
+  phoneMaxFor
+} from '../utils/leadFormFields.js';
 
 // --- Original 3-step wizard version of LeadForm (kept for reference, do not delete) ---
 //
@@ -161,15 +127,7 @@ export default function LeadForm() {
     formState: { errors }
   } = useForm({
     mode: 'onTouched',
-    defaultValues: {
-      fullName: '',
-      countryCode: '+91',
-      phone: '',
-      email: '',
-      state: '',
-      concernArea: '',
-      problemDetails: ''
-    }
+    defaultValues: LEAD_FORM_DEFAULTS
   });
 
   const selectedCode = watch('countryCode');
@@ -227,7 +185,7 @@ export default function LeadForm() {
                 </p>
               </div>
 
-              <Field label="Full Name" error={errors.fullName?.message}>
+              <FormField label="Full Name" error={errors.fullName?.message}>
                 <input
                   type="text"
                   placeholder="e.g. Ananya Sharma"
@@ -242,9 +200,9 @@ export default function LeadForm() {
                     }
                   })}
                 />
-              </Field>
+              </FormField>
 
-              <Field label="Phone Number" error={errors.phone?.message}>
+              <FormField label="Phone Number" error={errors.phone?.message}>
                 <div className="flex items-stretch gap-3 w-full">
                   <select
                     className=" !w-20 input shrink-0 text-sm"
@@ -281,9 +239,9 @@ export default function LeadForm() {
                     })}
                   />
                 </div>
-              </Field>
+              </FormField>
 
-              <Field label="Email Address" error={errors.email?.message}>
+              <FormField label="Email Address" error={errors.email?.message}>
                 <input
                   type="email"
                   placeholder="you@example.com"
@@ -297,9 +255,9 @@ export default function LeadForm() {
                     }
                   })}
                 />
-              </Field>
+              </FormField>
 
-              <Field label="State" error={errors.state?.message}>
+              <FormField label="State" error={errors.state?.message}>
                 <select
                   className="input"
                   {...register('state', { required: 'Please select your state' })}
@@ -311,9 +269,9 @@ export default function LeadForm() {
                     </option>
                   ))}
                 </select>
-              </Field>
+              </FormField>
 
-              <Field label="Area you'd like help with" error={errors.concernArea?.message}>
+              <FormField label="Area you'd like help with" error={errors.concernArea?.message}>
                 <select
                   className="input"
                   {...register('concernArea', { required: 'Please pick an area' })}
@@ -323,9 +281,9 @@ export default function LeadForm() {
                     <option key={a} value={a}>{a}</option>
                   ))}
                 </select>
-              </Field>
+              </FormField>
 
-              <Field
+              <FormField
                 label="What's going on? (in your own words)"
                 error={errors.problemDetails?.message}
               >
@@ -339,7 +297,7 @@ export default function LeadForm() {
                     maxLength: { value: 1000, message: 'Please keep it under 1000 characters' }
                   })}
                 />
-              </Field>
+              </FormField>
 
               {serverError && (
                 <p className="text-sm text-red-600">{serverError}</p>
@@ -390,15 +348,5 @@ export default function LeadForm() {
         textarea.input { min-height: 120px; }
       `}</style>
     </section>
-  );
-}
-
-function Field({ label, error, children }) {
-  return (
-    <label className="block">
-      <span className="text-sm font-medium text-gray-800">{label}</span>
-      <div className="mt-1.5">{children}</div>
-      {error && <span className="text-xs text-red-600 mt-1 block">{error}</span>}
-    </label>
   );
 }

@@ -10,7 +10,7 @@ const links = [
   // { label: 'Our Story', href: '#our-story' } // "Our Story" section removed per request
 ];
 
-export default function Navbar() {
+export default function Navbar({ onOpenLead }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -48,9 +48,9 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a href="#lead" className="hidden lg:inline-flex btn-primary text-sm py-2.5">
+        <button onClick={onOpenLead} className="hidden lg:inline-flex btn-primary text-sm py-2.5">
           Start Your Journey
-        </a>
+        </button>
 
         <button
           className="lg:hidden p-2 text-gray-800"
@@ -72,9 +72,12 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <a href="#lead" onClick={() => setOpen(false)} className="btn-primary w-full justify-center">
+              <button
+                onClick={() => { setOpen(false); onOpenLead(); }}
+                className="btn-primary w-full justify-center"
+              >
                 Start Your Journey
-              </a>
+              </button>
             </li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { sessionsBanner } from '../utils/images.js';
 
-export default function SessionsBanner() {
+export default function SessionsBanner({ onOpenLead }) {
   return (
     <section id="sessions" className="relative overflow-hidden">
       <img
@@ -15,12 +15,12 @@ export default function SessionsBanner() {
           One-on-one sessions with certified coaches to help you build routines,
           track progress, and develop a mindset that supports lasting balance.
         </p>
-        <a
-          href="#lead"
+        <button
+          onClick={onOpenLead}
           className="mt-8 inline-flex items-center gap-2 border border-white text-white px-7 py-3 rounded-full font-medium hover:bg-white hover:text-brand-teal transition"
         >
           Book now <ArrowRight size={16} />
-        </a>
+        </button>
       </div>
     </section>
   );

@@ -46,7 +46,7 @@ const pillars = [
   }
 ];
 
-export default function OurPhilosophy() {
+export default function OurPhilosophy({ onOpenLead }) {
   const gridRef = useRef(null);
   const [inView, setInView] = useState(false);
 
@@ -113,9 +113,9 @@ export default function OurPhilosophy() {
             Ready to start your transformation?
           </h3>
           <p className="mt-2 text-gray-600">Connect with your personal wellness coach today.</p>
-          <a href="#lead" className="btn-primary mt-6 inline-flex">
+          <button onClick={onOpenLead} className="btn-primary mt-6 inline-flex">
             Start Your Journey <ArrowRight size={16} />
-          </a>
+          </button>
         </div>
       </div>
     </section>
