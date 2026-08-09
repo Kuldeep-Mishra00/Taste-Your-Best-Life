@@ -13,10 +13,18 @@ import FAQ from './views/FAQ.jsx';
 import Footer from './views/Footer.jsx';
 import WhatsAppFloat from './views/WhatsAppFloat.jsx';
 import MobileLeadButton from './views/MobileLeadButton.jsx';
+import FestiveBanner from './views/FestiveBanner.jsx';
 
 export default function App() {
   const [leadModalOpen, setLeadModalOpen] = useState(false);
-  const openLeadModal = () => setLeadModalOpen(true);
+  const [leadPromotion, setLeadPromotion] = useState('');
+
+  // Callers may pass a promotion name (from the festive banner) — but when
+  // wired directly to onClick they'd pass the event, so only accept strings.
+  const openLeadModal = (promotion) => {
+    setLeadPromotion(typeof promotion === 'string' ? promotion : '');
+    setLeadModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -35,7 +43,12 @@ export default function App() {
       <Footer />
       <WhatsAppFloat />
       <MobileLeadButton onOpenLead={openLeadModal} />
-      <LeadFormModal open={leadModalOpen} onClose={() => setLeadModalOpen(false)} />
+      <FestiveBanner onOpenLead={openLeadModal} />
+      <LeadFormModal
+        open={leadModalOpen}
+        promotion={leadPromotion}
+        onClose={() => setLeadModalOpen(false)}
+      />
     </div>
   );
 }

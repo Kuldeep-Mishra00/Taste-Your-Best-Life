@@ -12,7 +12,7 @@ import {
   phoneMaxFor
 } from '../utils/leadFormFields.js';
 
-export default function LeadFormModal({ open, onClose }) {
+export default function LeadFormModal({ open, onClose, promotion = '' }) {
   const { submitting, serverError, submitted, submit } = useLeadFormController();
 
   const {
@@ -54,7 +54,8 @@ export default function LeadFormModal({ open, onClose }) {
       concernArea: data.concernArea,
       height: data.height,
       weight: data.weight,
-      problemDetails: data.problemDetails
+      problemDetails: data.problemDetails,
+      promotion // hidden — set only when opened from a festive banner
     });
 
   return (
@@ -78,6 +79,11 @@ export default function LeadFormModal({ open, onClose }) {
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Share a few details and a specialist will reach out within 24 hours.
               </p>
+              {promotion && (
+                <span className="inline-flex items-center gap-1 mt-3 text-xs font-medium px-3 py-1 rounded-full bg-brand-green/10 text-brand-green">
+                  🎉 {promotion} applied
+                </span>
+              )}
             </div>
 
             <FormField label="Full Name" error={errors.fullName?.message}>
