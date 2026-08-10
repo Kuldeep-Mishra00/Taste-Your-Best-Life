@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import { Check, ArrowRight, ChevronDown, X, PlayCircle } from 'lucide-react';
 import { useWellnessAreasController } from '../controllers/useWellnessAreasController.js';
 import { youtubeId } from '../utils/youtube.js';
+import FadeImage from './FadeImage.jsx';
 
 // --- Original Wellness Areas dataset (kept for reference, do not delete) ---
 // const cards = [
@@ -82,7 +83,7 @@ import { youtubeId } from '../utils/youtube.js';
 // Fallback data + fetch/merge logic now live in useWellnessAreasController.
 
 export default function WhyChooseUs({ onOpenLead }) {
-  const { cards } = useWellnessAreasController();
+  const { cards, loaded } = useWellnessAreasController();
   const [openCardId, setOpenCardId] = useState(null);
   // When a card's dropdown is open, it starts on the "details" (h3) view.
   // Clicking the "Watch Testimonials" button inside the dropdown switches to this view.
@@ -202,8 +203,8 @@ export default function WhyChooseUs({ onOpenLead }) {
                     isOpen ? 'ring-2 ring-brand-green' : ''
                   }`}
                 >
-                  <img
-                    src={c.image}
+                  <FadeImage
+                    src={loaded ? c.image : null}
                     alt={c.kicker}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700"
                   />
@@ -287,7 +288,7 @@ export default function WhyChooseUs({ onOpenLead }) {
                           <div className="grid sm:grid-cols-2 gap-4 max-w-3xl">
                             {(c.detailImages || []).map((url, imgIdx) => (
                               <div key={imgIdx} className="rounded-2xl overflow-hidden shadow-soft">
-                                <img
+                                <FadeImage
                                   src={url}
                                   alt={`${c.kicker} product ${imgIdx + 1}`}
                                   className="w-full max-h-80 object-cover"

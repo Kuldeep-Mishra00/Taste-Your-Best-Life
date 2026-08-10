@@ -90,21 +90,25 @@ const FALLBACK_AVATARS = Object.values(av);
 
 export function useTestimonialsController() {
   const [testimonials, setTestimonials] = useState(FALLBACK_TESTIMONIALS);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    fetchTestimonials().then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setTestimonials(data.map((item, i) => ({
-          name: item.name,
-          location: item.location || '',
-          avatar: item.avatar?.url || FALLBACK_AVATARS[i % FALLBACK_AVATARS.length],
-          rating: item.rating || 5,
-          quote: item.quote,
-          tag: item.tag || '',
-        })));
-      }
-    });
+    fetchTestimonials()
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTestimonials(data.map((item, i) => ({
+            name: item.name,
+            location: item.location || '',
+            avatar: item.avatar?.url || FALLBACK_AVATARS[i % FALLBACK_AVATARS.length],
+            rating: item.rating || 5,
+            quote: item.quote,
+            tag: item.tag || '',
+          })));
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoaded(true));
   }, []);
 
-  return { testimonials };
+  return { testimonials, loaded };
 }

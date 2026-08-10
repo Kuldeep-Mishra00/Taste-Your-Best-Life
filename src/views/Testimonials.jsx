@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTestimonialsController } from '../controllers/useTestimonialsController.js';
+import FadeImage from './FadeImage.jsx';
 
 export default function Testimonials() {
-  const { testimonials } = useTestimonialsController();
+  const { testimonials, loaded } = useTestimonialsController();
   const trackRef = useRef(null);
   const [paused, setPaused] = useState(false);
 
@@ -93,7 +94,7 @@ export default function Testimonials() {
               className="shrink-0 w-[300px] md:w-[340px] bg-white dark:bg-gray-800 rounded-2xl border border-brand-sage/60 dark:border-gray-700 shadow-sm hover:shadow-soft transition p-6 flex flex-col"
             >
               <div className="flex items-center gap-3">
-                <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
+                <FadeImage src={loaded ? t.avatar : null} alt={t.name} className="w-12 h-12 rounded-full object-cover" placeholderClassName="rounded-full" />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-gray-100">{t.name}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{t.location}</p>

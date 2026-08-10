@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X, ArrowRight } from 'lucide-react';
 import { useFestivePromotion } from '../controllers/useFestivePromotion.js';
 import { registerPromotionClick } from '../models/festiveModel.js';
+import FadeImage from './FadeImage.jsx';
 
 // Shows an entry flyer when a festive promotion is live (its time window is
 // active). Clicking it records a click and opens the lead form pre-tagged
@@ -38,7 +39,7 @@ export default function FestiveBanner({ onOpenLead }) {
           <button onClick={grab} className="block w-full" aria-label={promo.name}>
             {/* h-auto + full width shows the whole flyer at its true ratio —
                 identical on every device (the modal scrolls if it's tall). */}
-            <img src={promo.image.url} alt={promo.name} className="block w-full h-auto" />
+            <FadeImage src={promo.image.url} alt={promo.name} className="block w-full h-auto" />
           </button>
         ) : (
           <button onClick={grab} className="block w-full bg-gradient-to-br from-brand-green to-brand-teal p-10 text-center text-white">

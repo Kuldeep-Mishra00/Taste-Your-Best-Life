@@ -34,23 +34,27 @@ const FALLBACK_CARDS = [
 
 export function useWellnessAreasController() {
   const [cards, setCards] = useState(FALLBACK_CARDS);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    fetchWellnessAreas().then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setCards(data.map((item, i) => ({
-          id: item._id,
-          image: item.image?.url || FALLBACK_CARDS[i % FALLBACK_CARDS.length].image,
-          kicker: item.kicker || '',
-          title: item.title,
-          tags: item.tags || [],
-          videos: item.videos || [],
-          detailImages: (item.detailImages || []).map((im) => im.url).filter(Boolean),
-          detailVideo: item.detailVideo || '',
-        })));
-      }
-    });
+    fetchWellnessAreas()
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setCards(data.map((item, i) => ({
+            id: item._id,
+            image: item.image?.url || FALLBACK_CARDS[i % FALLBACK_CARDS.length].image,
+            kicker: item.kicker || '',
+            title: item.title,
+            tags: item.tags || [],
+            videos: item.videos || [],
+            detailImages: (item.detailImages || []).map((im) => im.url).filter(Boolean),
+            detailVideo: item.detailVideo || '',
+          })));
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoaded(true));
   }, []);
 
-  return { cards };
+  return { cards, loaded };
 }
