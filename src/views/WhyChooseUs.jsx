@@ -283,13 +283,17 @@ export default function WhyChooseUs({ onOpenLead }) {
 
                     {!showVideos ? (
                       <div className="space-y-4">
-                        {c.detailImage && (
-                          <div className="rounded-2xl overflow-hidden shadow-soft max-w-2xl">
-                            <img
-                              src={c.detailImage}
-                              alt={`${c.kicker} product`}
-                              className="w-full max-h-80 object-cover"
-                            />
+                        {(c.detailImages || []).length > 0 && (
+                          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl">
+                            {(c.detailImages || []).map((url, imgIdx) => (
+                              <div key={imgIdx} className="rounded-2xl overflow-hidden shadow-soft">
+                                <img
+                                  src={url}
+                                  alt={`${c.kicker} product ${imgIdx + 1}`}
+                                  className="w-full max-h-80 object-cover"
+                                />
+                              </div>
+                            ))}
                           </div>
                         )}
                         {c.detailVideo && (
