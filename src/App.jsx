@@ -14,6 +14,7 @@ import Footer from './views/Footer.jsx';
 import WhatsAppFloat from './views/WhatsAppFloat.jsx';
 import MobileLeadButton from './views/MobileLeadButton.jsx';
 import FestiveBanner from './views/FestiveBanner.jsx';
+import MetaPixel from './views/MetaPixel.jsx';
 
 export default function App() {
   const [leadModalOpen, setLeadModalOpen] = useState(false);
@@ -44,6 +45,7 @@ export default function App() {
       <WhatsAppFloat />
       <MobileLeadButton onOpenLead={openLeadModal} />
       <FestiveBanner onOpenLead={openLeadModal} />
+      <MetaPixel />
       <LeadFormModal
         open={leadModalOpen}
         promotion={leadPromotion}

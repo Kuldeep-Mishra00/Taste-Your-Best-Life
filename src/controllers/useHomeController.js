@@ -19,6 +19,7 @@ export function useHomeController() {
   const [sessionsBanner, setSessionsBanner] = useState(fallbackSessionsBanner);
   const [whatsappNumber, setWhatsappNumber] = useState(FALLBACK_WHATSAPP_NUMBER);
   const [whatsappMessage, setWhatsappMessage] = useState(FALLBACK_WHATSAPP_MESSAGE);
+  const [metaPixelId, setMetaPixelId] = useState('');
 
   useEffect(() => {
     fetchHome().then((data) => {
@@ -31,8 +32,9 @@ export function useHomeController() {
       if (data?.sessionsBanner?.url) setSessionsBanner(data.sessionsBanner.url);
       if (data?.whatsapp?.number) setWhatsappNumber(data.whatsapp.number);
       if (data?.whatsapp?.message) setWhatsappMessage(data.whatsapp.message);
+      if (data?.metaPixelId) setMetaPixelId(data.metaPixelId);
     });
   }, []);
 
-  return { heroPortrait, heroPortraitAlt, heroBackdrop, logo, sessionsBanner, whatsappNumber, whatsappMessage };
+  return { heroPortrait, heroPortraitAlt, heroBackdrop, logo, sessionsBanner, whatsappNumber, whatsappMessage, metaPixelId };
 }
