@@ -25,7 +25,7 @@ export default function FestiveBanner({ onOpenLead }) {
         onClick={() => setDismissed(true)}
         aria-hidden
       />
-      <div className="relative w-full max-w-md rounded-3xl overflow-hidden shadow-2xl fade-in bg-white dark:bg-gray-900 border border-brand-sage/40 dark:border-gray-700">
+      <div className="relative w-full max-w-md max-h-[92vh] overflow-y-auto rounded-3xl shadow-2xl fade-in bg-white dark:bg-gray-900 border border-brand-sage/40 dark:border-gray-700">
         <button
           onClick={() => setDismissed(true)}
           aria-label="Close"
@@ -36,7 +36,9 @@ export default function FestiveBanner({ onOpenLead }) {
 
         {promo.image?.url ? (
           <button onClick={grab} className="block w-full" aria-label={promo.name}>
-            <img src={promo.image.url} alt={promo.name} className="w-full max-h-[60vh] object-cover" />
+            {/* h-auto + full width shows the whole flyer at its true ratio —
+                identical on every device (the modal scrolls if it's tall). */}
+            <img src={promo.image.url} alt={promo.name} className="block w-full h-auto" />
           </button>
         ) : (
           <button onClick={grab} className="block w-full bg-gradient-to-br from-brand-green to-brand-teal p-10 text-center text-white">
