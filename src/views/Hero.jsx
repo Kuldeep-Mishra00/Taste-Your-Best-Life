@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 // import { ChevronDown } from 'lucide-react'; // was used by the removed "Our Philosophy" scroll button below
 // import { heroAvatars as avatars } from '../utils/images.js'; // was used by the removed avatar-stack stat line below
 import { useHomeController } from '../controllers/useHomeController.js';
+import FadeImage from './FadeImage.jsx';
 
 export default function Hero() {
   const { heroPortrait, heroPortraitAlt, heroBackdrop } = useHomeController();
@@ -15,8 +16,7 @@ export default function Hero() {
         aria-hidden
         className="absolute inset-0 opacity-40 pointer-events-none"
         style={{
-          backgroundImage:
-            `url(${heroBackdrop})`,
+          backgroundImage: heroBackdrop ? `url(${heroBackdrop})` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           mixBlendMode: 'lighten'
@@ -67,7 +67,7 @@ export default function Hero() {
 
         <div className="relative fade-in">
           <div className="relative rounded-[2rem] overflow-hidden shadow-soft aspect-[4/5] max-w-md mx-auto lg:mx-0 lg:ml-auto">
-            <img
+            <FadeImage
               src={heroPortrait}
               alt={heroPortraitAlt}
               className="w-full h-full object-cover"

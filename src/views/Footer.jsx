@@ -2,6 +2,7 @@ import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon } from 'lucide-
 import { useFooterLinksController } from '../controllers/useFooterLinksController.js';
 import { useHomeController } from '../controllers/useHomeController.js';
 import { useWellnessAreasController } from '../controllers/useWellnessAreasController.js';
+import FadeImage from './FadeImage.jsx';
 
 const PLATFORM_ICONS = { facebook: Facebook, instagram: Instagram, twitter: Twitter, youtube: Youtube };
 
@@ -46,10 +47,11 @@ export default function Footer() {
       <div className="w-full px-4 md:px-8 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2">
-            <img
+            <FadeImage
               src={logo}
               alt="NTYBL"
               className="h-9 w-9 object-contain bg-white/10 p-1 rounded"
+              placeholderClassName="rounded"
             />
             <span className="font-display text-lg text-white">NTYBL</span>
           </div>

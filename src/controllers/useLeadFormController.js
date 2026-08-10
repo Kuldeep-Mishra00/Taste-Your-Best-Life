@@ -16,6 +16,11 @@ export function useLeadFormController() {
     setSubmitting(false);
 
     if (result.ok) {
+      // Report the conversion to Meta Ads so it shows up as a "Lead" event.
+      // No-op if no Pixel ID is configured (fbq is never loaded).
+      if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead');
+      }
       setSubmitted(true);
     } else {
       setServerError(result.error || 'Submission failed. Please try again in a moment.');

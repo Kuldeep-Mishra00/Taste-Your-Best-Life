@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useHomeController } from '../controllers/useHomeController.js';
 import ThemeToggle from './ThemeToggle.jsx';
+import FadeImage from './FadeImage.jsx';
 
 const links = [
   { label: 'Home', href: '#home' },
@@ -32,10 +33,11 @@ export default function Navbar({ onOpenLead }) {
     >
       <nav className="w-full px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2 min-w-0 shrink">
-          <img
+          <FadeImage
             src={logo}
             alt="NTYBL"
             className="h-9 w-9 object-contain shrink-0"
+            placeholderClassName="rounded-full"
           />
           <span className="font-display font-semibold text-base sm:text-lg md:text-xl text-gray-900 dark:text-gray-100 truncate">
             NTYBL

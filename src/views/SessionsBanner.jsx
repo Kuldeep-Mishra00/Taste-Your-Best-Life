@@ -1,11 +1,12 @@
 import { ArrowRight } from 'lucide-react';
 import { useHomeController } from '../controllers/useHomeController.js';
+import FadeImage from './FadeImage.jsx';
 
 export default function SessionsBanner({ onOpenLead }) {
   const { sessionsBanner } = useHomeController();
   return (
     <section id="sessions" className="relative overflow-hidden">
-      <img
+      <FadeImage
         src={sessionsBanner}
         alt="Woman meditating by a lake"
         className="absolute inset-0 w-full h-full object-cover"

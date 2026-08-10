@@ -184,20 +184,36 @@ export default function LeadFormModal({ open, onClose, promotion = '' }) {
             </FormField>
 
             <div className="grid grid-cols-2 gap-3">
-              <FormField label="Height" error={errors.height?.message}>
+              <FormField label="Height (cm)" error={errors.height?.message}>
                 <input
                   type="text"
-                  placeholder="e.g. 172 cm"
+                  inputMode="numeric"
+                  placeholder="e.g. 172"
+                  maxLength={3}
                   className="input"
-                  {...register('height')}
+                  {...register('height', {
+                    pattern: { value: /^[0-9]*$/, message: 'Numbers only' },
+                    onChange: (e) => {
+                      const digits = e.target.value.replace(/\D/g, '').slice(0, 3);
+                      if (digits !== e.target.value) setValue('height', digits, { shouldValidate: false });
+                    }
+                  })}
                 />
               </FormField>
-              <FormField label="Weight" error={errors.weight?.message}>
+              <FormField label="Weight (kg)" error={errors.weight?.message}>
                 <input
                   type="text"
-                  placeholder="e.g. 72 kg"
+                  inputMode="numeric"
+                  placeholder="e.g. 72"
+                  maxLength={3}
                   className="input"
-                  {...register('weight')}
+                  {...register('weight', {
+                    pattern: { value: /^[0-9]*$/, message: 'Numbers only' },
+                    onChange: (e) => {
+                      const digits = e.target.value.replace(/\D/g, '').slice(0, 3);
+                      if (digits !== e.target.value) setValue('weight', digits, { shouldValidate: false });
+                    }
+                  })}
                 />
               </FormField>
             </div>
