@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
-
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '919999999999';
-const DEFAULT_MESSAGE =
-  "Hi! I'd like to know more about your wellness programs.";
+import { useHomeController } from '../controllers/useHomeController.js';
 
 export default function WhatsAppFloat() {
   const [open, setOpen] = useState(false);
+  const { whatsappNumber, whatsappMessage } = useHomeController();
 
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
+  // No number configured in the admin panel → don't show the button at all.
+  if (!whatsappNumber) return null;
+
+  const href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage || '')}`;
 
   return (
     <div className="fixed bottom-5 right-5 left-5 z-50 flex flex-col items-end gap-3 pointer-events-none">
