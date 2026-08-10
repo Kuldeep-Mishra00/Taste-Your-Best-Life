@@ -10,9 +10,12 @@ export default function SessionsBanner({ onOpenLead }) {
         alt="Woman meditating by a lake"
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0" style={{ background: 'rgba(115, 161, 177, 0.6)' }} />
+      {/* Same dark scrim as the Wellness Areas cards, for consistent
+          image-with-text treatment across the site (home is left as-is). */}
+      <div className="absolute inset-0 bg-black/5" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/55 to-black/25" />
       <div className="relative max-w-5xl mx-auto px-4 md:px-8 py-20 md:py-28 text-center text-white">
-        <p className="heading-display text-2xl md:text-4xl leading-snug font-medium">
+        <p className="font-display !text-white text-2xl md:text-4xl leading-snug font-medium [text-shadow:0_2px_8px_rgba(0,0,0,0.5)]">
           One-on-one sessions with certified coaches to help you build routines,
           track progress, and develop a mindset that supports lasting balance.
         </p>
