@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon } from 'lucide-react';
 import { useFooterLinksController } from '../controllers/useFooterLinksController.js';
 import { useHomeController } from '../controllers/useHomeController.js';
+import { useTestimonialsController } from '../controllers/useTestimonialsController.js';
 import { useWellnessAreasController } from '../controllers/useWellnessAreasController.js';
 import FadeImage from './FadeImage.jsx';
 
@@ -33,6 +34,7 @@ export default function Footer() {
   const { socialLinks } = useFooterLinksController();
   const { logo } = useHomeController();
   const { cards } = useWellnessAreasController();
+  const { testimonials, loaded: testimonialsLoaded } = useTestimonialsController();
 
   // Mirrors whatever Wellness Areas currently exist — add/rename/remove a
   // card in the admin panel and this list updates on its own, no code change.
@@ -40,7 +42,17 @@ export default function Footer() {
     title: 'We Help With',
     links: cards.map((c) => ({ label: c.kicker, href: '#wellness-areas' }))
   };
-  const cols = weHelpWithCol ? [STATIC_COLS[0], weHelpWithCol, STATIC_COLS[1]] : STATIC_COLS;
+
+  // Drop the Testimonials link when that section has nothing to show, same
+  // as the Navbar.
+  const showTestimonialsLink = !testimonialsLoaded || testimonials.length > 0;
+  const quickLinksCol = {
+    ...STATIC_COLS[0],
+    links: showTestimonialsLink
+      ? STATIC_COLS[0].links
+      : STATIC_COLS[0].links.filter((l) => l.href !== '#testimonials'),
+  };
+  const cols = weHelpWithCol ? [quickLinksCol, weHelpWithCol, STATIC_COLS[1]] : [quickLinksCol, STATIC_COLS[1]];
 
   return (
     <footer className="bg-gray-900 text-gray-300">

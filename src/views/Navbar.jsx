@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useHomeController } from '../controllers/useHomeController.js';
+import { useTestimonialsController } from '../controllers/useTestimonialsController.js';
 import ThemeToggle from './ThemeToggle.jsx';
 import FadeImage from './FadeImage.jsx';
 
-const links = [
+const BASE_LINKS = [
   { label: 'Home', href: '#home' },
   { label: 'Our Philosophy', href: '#philosophy' },
   { label: 'Wellness Areas', href: '#wellness-areas' },
@@ -14,8 +15,14 @@ const links = [
 
 export default function Navbar({ onOpenLead }) {
   const { logo } = useHomeController();
+  const { testimonials, loaded: testimonialsLoaded } = useTestimonialsController();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // The Testimonials section hides itself when there's no written feedback
+  // yet — drop the dead nav link in that case too.
+  const showTestimonialsLink = !testimonialsLoaded || testimonials.length > 0;
+  const links = showTestimonialsLink ? BASE_LINKS : BASE_LINKS.filter((l) => l.href !== '#testimonials');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);

@@ -36,6 +36,9 @@ export default function Testimonials() {
     el.scrollBy({ left: dir * 340, behavior: 'smooth' });
   };
 
+  // No written feedback yet (or still loading) — don't show an empty section.
+  if (!loaded || testimonials.length === 0) return null;
+
   const loop = [...testimonials, ...testimonials];
 
   return (
